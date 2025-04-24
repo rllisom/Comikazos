@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <title>REGISTRO</title>
+    <style type="text/css">
+        .portada{
+            height: 250px;
+        }
+    </style>
+    
+</head>
+<body>
+    <form th:action="addComic" th:object="${comicForm}">
+            <label for="name">Nombre</label>
+            <input type="text" th:field="*(name)">
+            
+            <label for="desc">Descripción</label>
+            <input type="text" th:field="*(desc)">
+
+            <label for="price">Precio</label>
+            <input type="number" th:field="*(price)">
+
+            <label for="sales">Ventas</label>
+            <input type="text" th:field="*(sales)">
+
+            
+            <label for="review">Review</label>
+            <input type="text" th:field="*(review)">
+
+            
+            <label for="fec">Fecha de salida</label>
+            <input type="date" th:field="*(fec)">
+
+            
+            <label for=""></label>
+            <input type="text">
+    </form>
+</body>
+</html>
