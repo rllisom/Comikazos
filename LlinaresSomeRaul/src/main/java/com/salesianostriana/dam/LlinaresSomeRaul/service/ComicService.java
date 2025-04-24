@@ -6,22 +6,23 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
+import com.salesianostriana.dam.LlinaresSomeRaul.repository.CategoryRepository;
 import com.salesianostriana.dam.LlinaresSomeRaul.repository.ComicRepository;
 
-
-
-
-
-
+@RequiredArgsConstructor
 @Service 
 public class ComicService {
 
-	@Autowired
-	private ComicRepository comicRepository;
+	private final ComicRepository comicRepository;
+	private final CategoryRepository categoryRepository;
+
 
 	
 	//GET ALL
@@ -47,10 +48,16 @@ public class ComicService {
 	}
 	//GET BY ID
 	public Comic getByid(Long id) {
-	
+
 		return comicRepository.findById(id).orElseThrow(
-			() -> new RuntimeException("No se ha encontrado el cómic"));
-		
-		
+			() -> new EntityNotFoundException("No se ha encontrado el cómic"));
+			
+	}
+
+	//POST NEW COMIC
+	public Comic add(ComicDTO c){
+		Category cat = categoryRepository.findById(c.getCategory_id()).orElse(null);
+		return comicRepository.save(ComicDTO.buildComic(c,cat));
+
 	}
 }

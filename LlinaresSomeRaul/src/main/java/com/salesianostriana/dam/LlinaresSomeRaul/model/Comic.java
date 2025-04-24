@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor 
 @Data
+@Builder
 public class Comic {
 
 	@Id
@@ -24,8 +26,9 @@ public class Comic {
 	private String desc;
 	private double price;
 	private int sales;
+	private int pages;
 	private double review;
-	private LocalDate fec;
+	private LocalDate date;
 	@ManyToOne
 	private Category category;
 

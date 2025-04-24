@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <title>REGISTRO</title>
     <style type="text/css">
         .portada{
@@ -17,30 +18,79 @@
     
 </head>
 <body>
-    <form th:action="addComic" th:object="${comicForm}">
-            <label for="name">Nombre</label>
-            <input type="text" th:field="*(name)">
-            
-            <label for="desc">Descripción</label>
-            <input type="text" th:field="*(desc)">
+    <header>
+        <header>
+            <img class="w-100 portada" src="../static/img/banner_comikazos.png" alt="Comikazos!">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a href="" class="navbar-brand">COMIKAZOS</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="menu">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item"><a class="nav-link" href="">Catálogo</a></li>
+                            <li class="nav-item"><a class="nav-link" href="">Mejores valorados</a></li>
+                            <li class="nav-item"><a class="nav-link" href="">DC</a></li>
+                            <li class="nav-item"><a class="nav-link" href="">Marvel</a></li>
+                            <li class="nav-item"><a class="nav-link" href="">Independiente</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    </header>
+    <main class="mt-3">
+        <h1 class="text-center">Añadir cómic</h1>
+        <form method="POST" class="container border rounded p-4 bg-light shadow-sm mx-auto m-3" th:action="@{/ck/add}" th:object="${comicForm}">
+            <div class="row mb-2">
+                <div class="col-6">
+                    <label class="form-label" for="name">Nombre</label>
+                    <input class="form-control" type="text" th:field="*{name}">
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="price">Precio</label>
+                    <input class="form-control" type="number" th:field="*{price}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label class="form-label" for="category">Editorial</label>
+                    <select class="form-select" th:field="*{category}">
+                        <option value="" selected>Selecciona una opción</option>
+                        <option th:each="cat : ${categories}"
+                        th:value="${cat.id}"
+                        th:text="${cat.name}"></option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="sales">Ventas</label>
+                    <input class="form-control" type="number" th:field="*{sales}">
+                </div>
+            </div>
+            <div class="d-flex flex-column mb-2">
+                <label class="form-label" for="desc">Descripción</label>
+                <textarea class="form-control" th:field="*{desc}"></textarea>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label" for="review">Review</label>
+                    <input class="form-control" type="number" th:field="*{review}">
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="pages">Páginas</label>
+                    <input class="form-control" type="number" th:field="*{pages}">
+                </div>
+        
+                <div class="input-group mb-3">
+                    <label  for="fec" class="input-group-text">Fecha de salida</label>
+                    <input  type="date" class="form-control" th:field="*{date}">
+                </div>
 
-            <label for="price">Precio</label>
-            <input type="number" th:field="*(price)">
-
-            <label for="sales">Ventas</label>
-            <input type="text" th:field="*(sales)">
-
-            
-            <label for="review">Review</label>
-            <input type="text" th:field="*(review)">
-
-            
-            <label for="fec">Fecha de salida</label>
-            <input type="date" th:field="*(fec)">
-
-            
-            <label for=""></label>
-            <input type="text">
-    </form>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success mt-auto w-50">Agregar</button>
+                </div>
+        </form>
+    </main>
 </body>
 </html>
