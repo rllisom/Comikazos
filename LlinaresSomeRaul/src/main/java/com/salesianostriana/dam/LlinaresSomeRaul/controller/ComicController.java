@@ -34,7 +34,7 @@ public class ComicController {
 	//GET NEW COMIC
 	@GetMapping("/new")
 	public String getNewComic(Model model){
-		Comic c = new Comic();
+		ComicDTO c = new ComicDTO();
 		model.addAttribute("categories", categoryService.getAll());
 		model.addAttribute("comicForm", c);
 		return "addComic";
@@ -44,7 +44,7 @@ public class ComicController {
 	@PostMapping("/add")
 	public String addNewComic(@ModelAttribute("comicForm") ComicDTO c){
 		comicService.add(c);
-		return "principal";
+		return "redirect:/ck";
 	}
 
 }
