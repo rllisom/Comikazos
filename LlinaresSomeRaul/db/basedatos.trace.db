@@ -3497,3 +3497,499 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
 	at org.springframework.boot.SpringApplicationShutdownHook.run(SpringApplicationShutdownHook.java:116)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
+2025-04-28 12:15:27.996217+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por "La saga de El Nido", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso "Dios ama, el hombre mata", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2) [42001-232]
+2025-04-28 12:15:28.035011+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute', 'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.', 54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [21002-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:294)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1859)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1808)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:347)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.salesianostriana.dam.LlinaresSomeRaul.LlinaresSomeRaulApplication.main(LlinaresSomeRaulApplication.java:10)
+2025-04-28 12:16:02.298404+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por "La saga de El Nido", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso "Dios ama, el hombre mata", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2) [42001-232]
+2025-04-28 12:16:02.327791+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: La cantidad de columnas no coincide
+Column count does not match; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute', 'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.', 54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [21002-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.dml.Insert.doPrepare(Insert.java:294)
+	at org.h2.command.dml.DataChangeStatement.prepare(DataChangeStatement.java:37)
+	at org.h2.command.Parser.prepareCommand(Parser.java:489)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:645)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:561)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1164)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:80)
+	at org.hibernate.tool.schema.internal.Helper.applySqlString(Helper.java:233)
+	at org.hibernate.tool.schema.internal.Helper.applyScript(Helper.java:255)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportFiles(SchemaCreatorImpl.java:694)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applyImportSources(SchemaCreatorImpl.java:597)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:186)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:144)
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:120)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:250)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1859)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1808)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:347)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.salesianostriana.dam.LlinaresSomeRaul.LlinaresSomeRaulApplication.main(LlinaresSomeRaulApplication.java:10)
+2025-04-28 12:17:53.141221+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por "La saga de El Nido", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso "Dios ama, el hombre mata", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2) [42001-232]
+2025-04-28 12:17:53.163162+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "DESC CHARACTER VARYING(255)": "U&'El h\\00e9roe m\\00e1s brillante y puro del Universo DC, sin su fortaleza, sin ... (275)"
+Value too long for column "DESC CHARACTER VARYING(255)": "U&'El h\\00e9roe m\\00e1s brillante y puro del Universo DC, sin su fortaleza, sin ... (275)"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute', 'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.', 54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [22001-232]
+2025-04-28 12:18:08.822070+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; se esperaba "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ""La saga de El Nido"", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ""Dios ama, el hombre mata"", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' [*]2)"; expected "[, ., ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', '¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por "La saga de El Nido", continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso "Dios ama, el hombre mata", con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', 33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2) [42001-232]
+2025-04-28 12:18:08.848999+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "DESC CHARACTER VARYING(255)": "U&'El h\\00e9roe m\\00e1s brillante y puro del Universo DC, sin su fortaleza, sin ... (275)"
+Value too long for column "DESC CHARACTER VARYING(255)": "U&'El h\\00e9roe m\\00e1s brillante y puro del Universo DC, sin su fortaleza, sin ... (275)"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute', 'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.', 54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [22001-232]
+2025-04-28 12:22:40.530408+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'),[*]"; se esperaba "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'),[*]"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), [42001-232]
+2025-04-28 12:22:40.545340+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"
+Syntax error in SQL statement "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"; SQL statement:
+'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', [42000-232]
+2025-04-28 12:22:40.560163+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]""¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"
+Syntax error in SQL statement "[*]""¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"; SQL statement:
+"¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca [42000-232]
+2025-04-28 12:22:40.578115+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"
+Syntax error in SQL statement "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"; SQL statement:
+habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, [42000-232]
+2025-04-28 12:22:40.586087+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "tras hito mutante, empezando por 'La saga de El Nido', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso [*]'Dios ama,"
+Syntax error in SQL statement "tras hito mutante, empezando por 'La saga de El Nido', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso [*]'Dios ama,"; SQL statement:
+tras hito mutante, empezando por 'La saga de El Nido', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso 'Dios ama, [42000-232]
+2025-04-28 12:22:40.596061+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "el hombre mata[*]', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"
+Syntax error in SQL statement "el hombre mata[*]', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; SQL statement:
+el hombre mata', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks [42000-232]
+2025-04-28 12:22:40.603042+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]"","
+Syntax error in SQL statement "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]"","; SQL statement:
+y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.", [42000-232]
+2025-04-28 12:22:40.613023+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2)"
+Syntax error in SQL statement "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2)"; SQL statement:
+33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2) [42000-232]
+2025-04-28 12:22:40.619997+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute',[*]"; se esperaba "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute',[*]"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute', [42001-232]
+2025-04-28 12:22:40.628973+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]""El héroe más brillante y puro del Universo DC,"
+Syntax error in SQL statement "[*]""El héroe más brillante y puro del Universo DC,"; SQL statement:
+"El héroe más brillante y puro del Universo DC, [42000-232]
+2025-04-28 12:22:40.637950+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"
+Syntax error in SQL statement "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"; SQL statement:
+sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y [42000-232]
+2025-04-28 12:22:40.650914+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "la comunidad que los esculpe.[*]"","
+Syntax error in SQL statement "la comunidad que los esculpe.[*]"","; SQL statement:
+la comunidad que los esculpe.", [42000-232]
+2025-04-28 12:22:40.660887+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"
+Syntax error in SQL statement "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"; SQL statement:
+54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [42000-232]
+2025-04-28 12:23:25.125631+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'),[*]"; se esperaba "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'),[*]"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), [42001-232]
+2025-04-28 12:23:25.144580+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"
+Syntax error in SQL statement "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"; SQL statement:
+'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', [42000-232]
+2025-04-28 12:23:25.158544+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]""¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"
+Syntax error in SQL statement "[*]""¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"; SQL statement:
+"¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca [42000-232]
+2025-04-28 12:23:25.169514+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"
+Syntax error in SQL statement "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"; SQL statement:
+habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, [42000-232]
+2025-04-28 12:23:25.182479+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "tras hito mutante, empezando por 'La saga de El Nido', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso [*]'Dios ama,"
+Syntax error in SQL statement "tras hito mutante, empezando por 'La saga de El Nido', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso [*]'Dios ama,"; SQL statement:
+tras hito mutante, empezando por 'La saga de El Nido', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso 'Dios ama, [42000-232]
+2025-04-28 12:23:25.193450+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "el hombre mata[*]', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"
+Syntax error in SQL statement "el hombre mata[*]', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; SQL statement:
+el hombre mata', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks [42000-232]
+2025-04-28 12:23:25.203424+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]"","
+Syntax error in SQL statement "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]"","; SQL statement:
+y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.", [42000-232]
+2025-04-28 12:23:25.227360+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2)"
+Syntax error in SQL statement "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2)"; SQL statement:
+33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg' 2) [42000-232]
+2025-04-28 12:23:25.244316+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute',[*]"; se esperaba "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute',[*]"; expected "DEFAULT, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXTVAL('comic_seq'), 'Superman Absolute', [42001-232]
+2025-04-28 12:23:25.256284+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]""El héroe más brillante y puro del Universo DC,"
+Syntax error in SQL statement "[*]""El héroe más brillante y puro del Universo DC,"; SQL statement:
+"El héroe más brillante y puro del Universo DC, [42000-232]
+2025-04-28 12:23:25.263263+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"
+Syntax error in SQL statement "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"; SQL statement:
+sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y [42000-232]
+2025-04-28 12:23:25.281216+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "la comunidad que los esculpe.[*]"","
+Syntax error in SQL statement "la comunidad que los esculpe.[*]"","; SQL statement:
+la comunidad que los esculpe.", [42000-232]
+2025-04-28 12:23:25.293184+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"
+Syntax error in SQL statement "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"; SQL statement:
+54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [42000-232]
+2025-04-28 12:25:03.159823+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:25:03.179748+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:25:03.187720+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"
+Syntax error in SQL statement "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"; SQL statement:
+'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', [42000-232]
+2025-04-28 12:25:03.196696+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"
+Syntax error in SQL statement "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"; SQL statement:
+'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca [42000-232]
+2025-04-28 12:25:03.203679+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"
+Syntax error in SQL statement "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"; SQL statement:
+habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, [42000-232]
+2025-04-28 12:25:03.212653+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama,"; se esperaba "TRUNCATE"
+Syntax error in SQL statement "[*]tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama,"; expected "TRUNCATE"; SQL statement:
+tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama, [42001-232]
+2025-04-28 12:25:03.220634+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; expected "EXPLAIN, EXECUTE"; SQL statement:
+el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks [42001-232]
+2025-04-28 12:25:03.232599+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]',"
+Syntax error in SQL statement "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]',"; SQL statement:
+y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', [42000-232]
+2025-04-28 12:25:03.246563+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2)"
+Syntax error in SQL statement "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2)"; SQL statement:
+33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2) [42000-232]
+2025-04-28 12:25:03.255542+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:25:03.263517+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:25:03.274488+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Superman Absolute',"
+Syntax error in SQL statement "[*]'Superman Absolute',"; SQL statement:
+'Superman Absolute', [42000-232]
+2025-04-28 12:25:03.280472+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'El héroe más brillante y puro del Universo DC,"
+Syntax error in SQL statement "[*]'El héroe más brillante y puro del Universo DC,"; SQL statement:
+'El héroe más brillante y puro del Universo DC, [42000-232]
+2025-04-28 12:25:03.289448+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"
+Syntax error in SQL statement "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"; SQL statement:
+sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y [42000-232]
+2025-04-28 12:25:03.297427+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "la comunidad que los esculpe.[*]',"
+Syntax error in SQL statement "la comunidad que los esculpe.[*]',"; SQL statement:
+la comunidad que los esculpe.', [42000-232]
+2025-04-28 12:25:03.304410+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"
+Syntax error in SQL statement "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"; SQL statement:
+54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [42000-232]
+2025-04-28 12:25:16.897399+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:25:16.913804+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:25:16.926776+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"
+Syntax error in SQL statement "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"; SQL statement:
+'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', [42000-232]
+2025-04-28 12:25:16.938738+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"
+Syntax error in SQL statement "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"; SQL statement:
+'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca [42000-232]
+2025-04-28 12:25:16.949709+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"
+Syntax error in SQL statement "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"; SQL statement:
+habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, [42000-232]
+2025-04-28 12:25:16.960690+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama,"; se esperaba "TRUNCATE"
+Syntax error in SQL statement "[*]tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama,"; expected "TRUNCATE"; SQL statement:
+tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama, [42001-232]
+2025-04-28 12:25:16.972647+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; expected "EXPLAIN, EXECUTE"; SQL statement:
+el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks [42001-232]
+2025-04-28 12:25:16.988607+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]',"
+Syntax error in SQL statement "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]',"; SQL statement:
+y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', [42000-232]
+2025-04-28 12:25:17.052434+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2)"
+Syntax error in SQL statement "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2)"; SQL statement:
+33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2) [42000-232]
+2025-04-28 12:25:17.074375+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:25:17.082354+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:25:17.094321+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Superman Absolute',"
+Syntax error in SQL statement "[*]'Superman Absolute',"; SQL statement:
+'Superman Absolute', [42000-232]
+2025-04-28 12:25:17.100305+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'El héroe más brillante y puro del Universo DC,"
+Syntax error in SQL statement "[*]'El héroe más brillante y puro del Universo DC,"; SQL statement:
+'El héroe más brillante y puro del Universo DC, [42000-232]
+2025-04-28 12:25:17.112274+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"
+Syntax error in SQL statement "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"; SQL statement:
+sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y [42000-232]
+2025-04-28 12:25:17.121250+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "la comunidad que los esculpe.[*]',"
+Syntax error in SQL statement "la comunidad que los esculpe.[*]',"; SQL statement:
+la comunidad que los esculpe.', [42000-232]
+2025-04-28 12:25:17.129227+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"
+Syntax error in SQL statement "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"; SQL statement:
+54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [42000-232]
+2025-04-28 12:26:51.299772+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Category (id, name)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Category (id, name)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Category (id, name) [42001-232]
+2025-04-28 12:26:51.319891+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (1, 'DC'),[*]"; se esperaba "ROW (, (, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (1, 'DC'),[*]"; expected "ROW (, (, INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (1, 'DC'), [42001-232]
+2025-04-28 12:26:51.380731+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]2, 'Marvel'),"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]2, 'Marvel'),"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+(2, 'Marvel'), [42001-232]
+2025-04-28 12:26:51.401672+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]3, 'Independiente')"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]3, 'Independiente')"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+(3, 'Independiente') [42001-232]
+2025-04-28 12:26:51.412643+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:26:51.422280+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:26:51.432252+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"
+Syntax error in SQL statement "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"; SQL statement:
+'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', [42000-232]
+2025-04-28 12:26:51.438236+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama, el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.',"
+Syntax error in SQL statement "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama, el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.',"; SQL statement:
+'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama, el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', [42000-232]
+2025-04-28 12:26:51.447212+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2),"
+Syntax error in SQL statement "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2),"; SQL statement:
+33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2), [42000-232]
+2025-04-28 12:26:51.453196+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "([*]NEXT VALUE FOR comic_seq,"; se esperaba "(, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "([*]NEXT VALUE FOR comic_seq,"; expected "(, SELECT, TABLE, VALUES"; SQL statement:
+(NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:26:51.463170+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Superman Absolute',"
+Syntax error in SQL statement "[*]'Superman Absolute',"; SQL statement:
+'Superman Absolute', [42000-232]
+2025-04-28 12:26:51.469154+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.',"
+Syntax error in SQL statement "[*]'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.',"; SQL statement:
+'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.', [42000-232]
+2025-04-28 12:26:51.482533+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"
+Syntax error in SQL statement "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"; SQL statement:
+54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [42000-232]
+2025-04-28 12:27:34.359543+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:27:34.379911+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:27:34.393875+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"
+Syntax error in SQL statement "[*]'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3',"; SQL statement:
+'Biblioteca Marvel Omnibus. La Imposible Patrulla-X 3', [42000-232]
+2025-04-28 12:27:34.406838+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"
+Syntax error in SQL statement "[*]'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca"; SQL statement:
+'¡Una histórica edición de la totalmente nueva y totalmente diferente Patrulla-X como nunca [42000-232]
+2025-04-28 12:27:34.414817+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"
+Syntax error in SQL statement "habías imaginado[*]! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante,"; SQL statement:
+habías imaginado! El tratamiento de contenidos de Biblioteca Marvel continúa en la línea Marvel Omnibus, a través de este gigantesco volumen. Hito mutante, [42000-232]
+2025-04-28 12:27:34.425788+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama,"; se esperaba "TRUNCATE"
+Syntax error in SQL statement "[*]tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama,"; expected "TRUNCATE"; SQL statement:
+tras hito mutante, empezando por ''La saga de El Nido'', continuando por la metáfora definitiva de la intolerancia hacia los diferentes que supuso ''Dios ama, [42001-232]
+2025-04-28 12:27:34.434763+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; se esperaba "EXPLAIN, EXECUTE"
+Syntax error in SQL statement "[*]el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks"; expected "EXPLAIN, EXECUTE"; SQL statement:
+el hombre mata'', con la miniserie de Lobezno que reunió a Chris Claremont y Frank Miller, la integración de Pícara en La Patrulla-X, la llegada de Los Morlocks [42001-232]
+2025-04-28 12:27:34.446732+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]',"
+Syntax error in SQL statement "y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.[*]',"; SQL statement:
+y el regreso de Fénix Oscura, en la saga que presenta además a Madelyne Pryor, entre otras muchas historias imprescindibles.', [42000-232]
+2025-04-28 12:27:34.462689+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2)"
+Syntax error in SQL statement "[*]33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2)"; SQL statement:
+33.27, 705, 100, 2.36, '2025-04-05', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/o/somni046_0.jpg', 2) [42000-232]
+2025-04-28 12:27:34.472663+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:27:34.480640+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "VALUES (NEXT VALUE FOR comic_seq,[*]"; se esperaba "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"
+Syntax error in SQL statement "VALUES (NEXT VALUE FOR comic_seq,[*]"; expected "INTERSECTS (, NOT, EXISTS, UNIQUE, INTERSECTS"; SQL statement:
+VALUES (NEXT VALUE FOR comic_seq, [42001-232]
+2025-04-28 12:27:34.491611+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'Superman Absolute',"
+Syntax error in SQL statement "[*]'Superman Absolute',"; SQL statement:
+'Superman Absolute', [42000-232]
+2025-04-28 12:27:34.498592+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]'El héroe más brillante y puro del Universo DC,"
+Syntax error in SQL statement "[*]'El héroe más brillante y puro del Universo DC,"; SQL statement:
+'El héroe más brillante y puro del Universo DC, [42000-232]
+2025-04-28 12:27:34.512555+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"
+Syntax error in SQL statement "sin su fortaleza, sin una familia, sin un hogar[*]… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y"; SQL statement:
+sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y [42000-232]
+2025-04-28 12:27:34.522528+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "la comunidad que los esculpe.[*]',"
+Syntax error in SQL statement "la comunidad que los esculpe.[*]',"; SQL statement:
+la comunidad que los esculpe.', [42000-232]
+2025-04-28 12:27:34.532503+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"
+Syntax error in SQL statement "[*]54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1)"; SQL statement:
+54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [42000-232]
+2025-04-28 12:29:39.466996+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; se esperaba "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"
+Syntax error in SQL statement "INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id)[*]"; expected "OVERRIDING USER VALUE, OVERRIDING SYSTEM VALUE, DIRECT, DEFAULT VALUES, VALUES, SET, WITH, (, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) [42001-232]
+2025-04-28 12:31:26.341035+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "DESC CHARACTER VARYING(255)": "U&'El h\\00e9roe m\\00e1s brillante y puro del Universo DC, sin su fortaleza, sin ... (275)"
+Value too long for column "DESC CHARACTER VARYING(255)": "U&'El h\\00e9roe m\\00e1s brillante y puro del Universo DC, sin su fortaleza, sin ... (275)"; SQL statement:
+INSERT INTO Comic (id, name, desc, price, sales, pages, review, date, url, category_id) VALUES (NEXT VALUE FOR comic_seq, 'Superman Absolute', 'El héroe más brillante y puro del Universo DC, sin su fortaleza, sin una familia, sin un hogar… ¡El Hombre de Acero en su versión Absolute! Solo y aislado, será aquí donde comprendas la profunda importancia que tiene para los héroes el entorno y la comunidad que los esculpe.', 54.03, 459, 100, 2.86, '2024-04-27', 'https://www.panini.es/media/catalog/product/cache/2d16730310b7945c46ddd1ca513e3c42/s/a/sabsu001_0.jpg', 1) [22001-232]

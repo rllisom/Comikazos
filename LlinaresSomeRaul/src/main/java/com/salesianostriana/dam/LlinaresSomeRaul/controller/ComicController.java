@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
-import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
+
 import com.salesianostriana.dam.LlinaresSomeRaul.service.CategoryService;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.ComicService;
 

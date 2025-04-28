@@ -48,9 +48,11 @@ i<!DOCTYPE html>
             <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-2 row-cols-md-4" >
                 <!--Tarjetas-->
                 <div class="col" th:each="category : ${categories}">
-                    <div class="card h-100 text-center">
-                        <p th:text="${category.name}"></p>
-                    </div>
+                    <a th:href="@{/ck/show/{id}(id=${category.id})}">
+                        <div class="card h-100 text-center">
+                            <p th:text="${category.name}"></p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -96,5 +98,6 @@ i<!DOCTYPE html>
             </div>
         </section>
     </main>
+    <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>
 </html>

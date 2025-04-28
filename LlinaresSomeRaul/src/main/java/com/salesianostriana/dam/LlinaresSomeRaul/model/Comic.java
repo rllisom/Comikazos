@@ -29,6 +29,7 @@ public class Comic {
 	private int pages;
 	private double review;
 	private LocalDate date;
+	private String url;
 	@ManyToOne
 	private Category category;
 
