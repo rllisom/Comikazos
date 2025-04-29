@@ -14,12 +14,13 @@ import lombok.NoArgsConstructor;
 public class ComicDTO {
 
 	private String name;
-	private String desc;
+	private String syn;
 	private double price;
 	private int sales;
 	private int pages;
 	private double review;
-	private LocalDate date;
+	private LocalDate dat;
+	private String url;
 	private Long category_id;
 
 
@@ -27,12 +28,13 @@ public class ComicDTO {
 	public static Comic buildComic(ComicDTO dto, Category cat) {
 		return Comic.builder()
 				.name(dto.getName())
-				.desc(dto.getDesc())
+				.syn(dto.getSyn())
 				.price(dto.getPrice())
 				.sales(dto.getSales())
 				.pages(dto.getPages())
 				.review(dto.getReview())
-				.date(dto.getDate())
+				.dat(dto.getDat())
+				.url(dto.getUrl())
 				.category(cat)
 				.build();
 	}

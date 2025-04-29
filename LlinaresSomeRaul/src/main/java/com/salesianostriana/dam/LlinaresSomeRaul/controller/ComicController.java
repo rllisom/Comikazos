@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.controller;
 
+import com.salesianostriana.dam.LlinaresSomeRaul.dto.CategoryDTO;
+import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,23 +27,18 @@ public class ComicController {
 	//GET WEB PPAL
 	@GetMapping(" ")
 	public String getWeb(Model model){
+
+		model.addAttribute("catForm",new CategoryDTO());
+		model.addAttribute("comicForm", new ComicDTO());
 		model.addAttribute("categories", categoryService.getAll());
 		model.addAttribute("comics", comicService.getBest());
 		model.addAttribute("comicList",comicService.getCatalogue());
 		return "principal";
 	}
 	
-	//GET NEW COMIC
-	@GetMapping("/new")
-	public String getNewComic(Model model){
-		ComicDTO c = new ComicDTO();
-		model.addAttribute("categories", categoryService.getAll());
-		model.addAttribute("comicForm", c);
-		return "addComic";
-	}
 
 	//POST NEW COMIC
-	@PostMapping("/add")
+	@PostMapping("/addComic")
 	public String addNewComic(@ModelAttribute("comicForm") ComicDTO c){
 		comicService.add(c);
 		return "redirect:/ck";

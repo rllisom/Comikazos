@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.salesianostriana.dam.LlinaresSomeRaul.dto.CategoryDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -55,9 +56,19 @@ public class ComicService {
 	}
 
 	//POST NEW COMIC
-	public Comic add(ComicDTO c){
-		Category cat = categoryRepository.findById(c.getCategory_id()).orElse(null);
-		return comicRepository.save(ComicDTO.buildComic(c,cat));
+	public Comic add(ComicDTO dto){
+		Category cat = categoryRepository.findById(dto.getCategory_id()).orElse(null);
+
+		boolean exist = comicRepository.findAll().stream()
+				.anyMatch(c -> c.getName().equalsIgnoreCase(dto.getName()));
+
+		if (exist) {
+			return null;
+		} else {
+			return comicRepository.save(ComicDTO.buildComic(dto,cat));
+		}
+
 
 	}
+
 }
