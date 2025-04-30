@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.CategoryDTO;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,8 +26,7 @@ public class CategoryService {
 
     //GET BY ID
     public Category getById(Long id){
-        return categoryRepository.findById(id).orElseThrow(
-                () ->  new EntityNotFoundException("No se ha encontrado la categoría"));
+        return categoryRepository.findById(id).orElse(null);
     }
 
     //ADD NEW CATEGORY

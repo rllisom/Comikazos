@@ -15,115 +15,149 @@
 <body class="bg-light">
 
 <header th:replace="~{fragments/header::header}"></header>
-
 <main class="container my-5">
-    <h1 class="text-center mb-4 fw-bold" th:text="${category.name}"></h1>
-
-    <div class="ms-2 mt-4">
-        <a th:href="@{/ck}" class="btn btn-outline-dark">
-            <i class="bi bi-arrow-left-circle"></i> Volver atrás
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a th:href="@{/ck}" class="btn btn-outline-secondary rounded-pill">
+            <i class="bi bi-arrow-left-short me-1"></i>Volver al catálogo
         </a>
-    </div>
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-semibold">Cómics:</h3>
         <div class="dropdown">
-            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-list"></i>
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                <i class="bi bi-gear-fill"></i> Administrar
             </button>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu">
-                <li><a class="dropdown-item" href="#">Modificar</a></li>
-                <li><a class="dropdown-item" href="#">Eliminar</a></li>
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+                <li><a class="dropdown-item text-primary" href="#">
+                    <i class="bi bi-pencil-square me-2"></i>Editar editorial
+                </a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#">
+                    <i class="bi bi-trash3 me-2"></i>Eliminar editorial
+                </a></li>
             </ul>
         </div>
     </div>
 
+    <header class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-primary mb-3" th:text="${category.name}"></h1>
+        <p class="lead text-muted" th:if="${not #lists.isEmpty(category.listComic)}">
+            Mostrando <span th:text="${category.listComic.size()}"></span> cómics en esta colección
+        </p>
+    </header>
+
     <!-- Lista de cómics -->
     <section>
-        <div th:if="${#lists.isEmpty(category.listComic)}" class="alert alert-warning text-center">
-            No hay cómics disponibles
+        <div th:if="${#lists.isEmpty(category.listComic)}" class="card shadow border-0">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-bookmarks display-4 text-muted mb-3"></i>
+                <h3 class="text-secondary mb-3">No hay cómics disponibles</h3>
+                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newComicModal">
+                    <i class="bi bi-plus-lg me-2"></i>Agregar primer cómic
+                </button>
+            </div>
         </div>
 
-        <div th:if="${not #lists.isEmpty(category.listComic)}" class="row row-cols-2 row-cols-md-4 g-4">
+        <div th:if="${not #lists.isEmpty(category.listComic)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
             <div class="col" th:each="list : ${category.listComic}">
-                <div class="card h-100 shadow-sm border-0">
-                    <img th:src="${list.url}" alt="${list.name}" class="mt-2 img-fluid">
-                    <div class="card-body text-center d-flex flex-column justify-content-between">
-                        <h5 class="card-title" th:text="${list.name}"></h5>
-                        <p class="text-muted mb-0" th:text="${list.category.name}"></p>
-                    </div>
+                <div class="card h-100 border-0 shadow-sm transition-all hover-shadow">
+                    <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none text-dark">
+                        <div class="position-relative">
+                            <img th:src="${list.url}" alt="${list.name}" 
+                                class="card-img-top mt-2 object-fit-cover" 
+                                style="height: 250px;">
+                            <span th:if="${list.sales > 100}" class="badge bg-danger position-absolute top-0 start-0 m-2"><i class="bi bi-fire me-1"></i>Popular</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold mb-1" th:text="${list.name}"></h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary" th:text="${list.category.name}"></span>
+                                <span class="text-success fw-bold">
+                                    <span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>€
+                                </span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="text-center mt-4">
-            <button type="button" class="btn btn-outline-dark rounded-circle" data-bs-toggle="modal" data-bs-target="#newComicModal">
-                <i class="bi bi-plus-circle-fill fs-4"></i>
+        <div class="text-center mt-5">
+            <button type="button" 
+                    class="btn btn-primary rounded-pill px-4 py-2" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#newComicModal">
+                <i class="bi bi-plus-lg me-2"></i>Añadir nuevo cómic
             </button>
         </div>
     </section>
 
-    <!-- Modal para agregar un cómic -->
-    <div class="modal fade" id="newComicModal" tabindex="-1" aria-labelledby="newComicModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content shadow">
-                <div class="modal-header">
-                    <h5 class="modal-title">Agregar Cómic</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+    <!-- Modal para agregar cómic -->
+    <div class="modal fade" id="newComicModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-book me-2"></i>Nuevo Cómic
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-
-                <div class="modal-body">
-                    <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}">
+                
+                <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation" novalidate>
+                    <div class="modal-body">
                         <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Nombre</label>
-                                <input class="form-control" type="text" th:field="*{name}">
+                            <div class="col-md-8">
+                                <label class="form-label fw-semibold">Título del cómic <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" th:field="*{name}" required>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Precio</label>
-                                <input class="form-control" type="number" step="0.01" th:field="*{price}">
+                            
+                            <div class="col-md-4">
+                                <label class="form-label fw-semibold">Precio <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="number" class="form-control" step="0.01" th:field="*{price}" required>
+                                </div>
                             </div>
-
+                            
                             <div class="col-md-6">
-                                <label class="form-label">Editorial</label>
-                                <select class="form-select" th:field="*{category_id}">
-                                    <option value="" selected>Selecciona una opción</option>
-                                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
-                                </select>
+                                <label class="form-label fw-semibold">Fecha de publicación <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" th:field="*{dat}" required>
                             </div>
+                            
                             <div class="col-md-6">
-                                <label class="form-label">Ventas</label>
-                                <input class="form-control" type="number" step="1" th:field="*{sales}">
+                                <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" th:field="*{pages}" required>
                             </div>
-
+                            
                             <div class="col-12">
-                                <label class="form-label">Descripción</label>
-                                <textarea class="form-control" th:field="*{syn}"></textarea>
+                                <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
+                                <textarea class="form-control" th:field="*{syn}" rows="3" required></textarea>
                             </div>
-
+                            
                             <div class="col-md-6">
-                                <label class="form-label">Review</label>
-                                <input class="form-control" type="number" step="0.01" th:field="*{review}">
+                                <label class="form-label fw-semibold">URL de la portada <span class="text-danger">*</span></label>
+                                <input type="url" class="form-control" th:field="*{url}" required>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Páginas</label>
-                                <input class="form-control" type="number" th:field="*{pages}">
+                            
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Valoración <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" step="0.1" min="0" max="5" th:field="*{review}" required>
+                                    <span class="input-group-text">/5</span>
+                                </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Fecha de salida</label>
-                                <input type="date" class="form-control" th:field="*{dat}">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">URL de Imagen</label>
-                                <input type="text" class="form-control" th:field="*{url}">
+                            
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold">Unidades vendidas</label>
+                                <input type="number" class="form-control" th:field="*{sales}">
                             </div>
                         </div>
-
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-success px-5">Agregar</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-save me-2"></i>Guardar cómic
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,6 +37,12 @@ public class ComicController {
 		return "principal";
 	}
 	
+	//GET BY ID
+	@GetMapping("/comic/{id}")
+	public String getComic(@PathVariable Long id, Model model){
+		model.addAttribute("comic", comicService.getByid(id));
+		return "getComic";
+	}
 
 	//POST NEW COMIC
 	@PostMapping("/addComic")
