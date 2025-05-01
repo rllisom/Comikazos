@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.CategoryDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
+import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,21 +20,20 @@ import com.salesianostriana.dam.LlinaresSomeRaul.repository.ComicRepository;
 
 @RequiredArgsConstructor
 @Service 
-public class ComicService {
+public class ComicService extends BaseService<Comic,Long,ComicRepository> {
 
-	private final ComicRepository comicRepository;
-	private final CategoryRepository categoryRepository;
 
+	private final CategoryService categoryService;
 
 	
 	//GET ALL
 	public List<Comic> getAll(){
-		return comicRepository.findAll();
+		return findAll();
 	}
 	
 	//GET 5 BEST
 	public List<Comic> getBest(){
-		return comicRepository.findAll().stream()
+		return findAll().stream()
 		.sorted(Comparator.comparingDouble(Comic::getReview).reversed())
 		.limit(5)
 		.toList();
@@ -41,7 +41,7 @@ public class ComicService {
 
 	//GET 10 RANDOM
 	public List<Comic> getCatalogue(){
-		List<Comic> newRandomList = new ArrayList<>(comicRepository.findAll());
+		List<Comic> newRandomList = new ArrayList<>(findAll());
 		Collections.shuffle(newRandomList);
 		return newRandomList.stream()
 			.limit(10)
@@ -50,22 +50,21 @@ public class ComicService {
 	//GET BY ID
 	public Comic getByid(Long id) {
 
-		return comicRepository.findById(id).orElseThrow(
-			() -> new EntityNotFoundException("No se ha encontrado el cómic"));
+		return findById(id);
 			
 	}
 
 	//POST NEW COMIC
 	public Comic add(ComicDTO dto){
-		Category cat = categoryRepository.findById(dto.getCategory_id()).orElse(null);
+		Category cat = categoryService.findById(dto.getCategory_id());
 
-		boolean exist = comicRepository.findAll().stream()
+		boolean exist = findAll().stream()
 				.anyMatch(c -> c.getName().equalsIgnoreCase(dto.getName()));
 
 		if (exist) {
 			return null;
 		} else {
-			return comicRepository.save(ComicDTO.buildComic(dto,cat));
+			return save(ComicDTO.buildComic(dto,cat));
 		}
 
 

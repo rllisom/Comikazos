@@ -16,6 +16,21 @@
 
 <header th:replace="~{fragments/header::header}"></header>
 <main class="container my-5">
+    <!-- Alert para error en la eliminación de categoría -->
+    <div th:if="${done != null and !done}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al eliminar la categoría.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Alert para error en la modificación de categoría -->
+    <div th:if="${success != null and !success}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al modificar la categoría.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Alert para modificación exitosa de categoría -->
+    <div th:if="${done}" class="alert alert-success alert-dismissible fade show" role="alert">
+        Categoría modificada correctamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <div class="d-flex justify-content-between align-items-center mb-4">
         <a th:href="@{/ck}" class="btn btn-outline-secondary rounded-pill">
             <i class="bi bi-arrow-left-short me-1"></i>Volver al catálogo
@@ -25,11 +40,11 @@
                 <i class="bi bi-gear-fill"></i> Administrar
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow">
-                <li><a class="dropdown-item text-primary" href="#">
+                <li><a class="dropdown-item text-primary" type="button" data-bs-toggle="modal" data-bs-target="#newCategoryNameModal">
                     <i class="bi bi-pencil-square me-2"></i>Editar editorial
                 </a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item text-danger" href="#">
+                <li><a type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteCategory">
                     <i class="bi bi-trash3 me-2"></i>Eliminar editorial
                 </a></li>
             </ul>
@@ -160,6 +175,71 @@
                 </form>
             </div>
         </div>
+    </div>
+    <!-- Modal para cambiar Categoría -->
+    <div class="modal fade" id="newCategoryNameModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title"><i class="bi bi-building me-2"></i>Nuevo nombre de la editorial</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form method="POST" th:action="@{/ck/category/modyfy/{id}(id=${category.id})}" >
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Nuevo nombre de la editorial</label>
+                            <input type="text" th:field="${category.name}" th:text="${category.name}" class="form-control" placeholder="Introduzca el nombre" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de eliminar categoría -->
+    <div class="modal fade" id="deleteCategory" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <form th:action="@{/ck/category/delete/{id}(id=${category.id})}" method="POST">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title">Eliminar Categoría</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body text-center">
+                        <p>¿Estás seguro de que deseas eliminar la categoría?</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-danger w-100">Sí</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-success w-100" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- Alert para error en la eliminación de categoría -->
+    <div th:if="${done != null and !done}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al eliminar la categoría.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Alert para error en la modificación de categoría -->
+    <div th:if="${success != null and !success}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al modificar la categoría.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Alert para modificación exitosa de categoría -->
+    <div th:if="${done}" class="alert alert-success alert-dismissible fade show" role="alert">
+        Categoría modificada correctamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </main>
 

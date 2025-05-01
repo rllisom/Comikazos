@@ -1,4 +1,5 @@
 -- Categorías
+INSERT INTO Category (id, name) VALUES (0, 'Undefined');
 INSERT INTO Category (id, name) VALUES (1, 'DC');
 INSERT INTO Category (id, name) VALUES (2, 'Marvel');
 ALTER TABLE Category ALTER COLUMN id RESTART WITH 3;

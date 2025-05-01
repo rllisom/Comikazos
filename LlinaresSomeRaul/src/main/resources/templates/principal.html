@@ -14,6 +14,11 @@
     <header th:replace="~{fragments/header::header}"></header>
 
     <main class="py-5">
+        <!-- Alert para eliminación exitosa de categoría -->
+        <div th:if="${done}" class="alert alert-success alert-dismissible fade show" role="alert">
+            Categoría eliminada correctamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <!-- Sección Editoriales -->
         <section class="container-lg my-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -27,8 +32,8 @@
                 No se encontraron editoriales
             </div>
             
-            <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-                <div class="col" th:each="category : ${categories}">
+            <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
+                <div class="col" th:each="category : ${categories}" th:if="${category.id}!=0" >
                     <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark">
                         <div class="card h-100 shadow-hover border-0">
                             <div class="card-body text-center d-flex flex-column justify-content-center">
@@ -126,7 +131,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>

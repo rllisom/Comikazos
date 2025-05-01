@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.service.CategoryService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/ck")
@@ -39,5 +40,29 @@ public class CategoryController {
         }
         System.out.println(add);
         return "redirect:/ck";
+    }
+
+    //DELETE
+    @PostMapping("/category/delete/{id}")
+    public String deleteCategory(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        if(categoryService.deleteCategory(id)){
+            redirectAttributes.addFlashAttribute("done",true);
+            return "redirect:/ck";
+        }else{
+            redirectAttributes.addFlashAttribute("done",true);
+            return "redirect:/ck/show/"+id;
+        }
+    }
+
+    //MODIFY NAME
+    @PostMapping("/category/modify/{id}")
+    public String modifyCategory(@PathVariable Long id, String name, RedirectAttributes redirectAttributes){
+        if(categoryService.deleteCategory(id)){
+            redirectAttributes.addFlashAttribute("success",true);
+            return "redirect:/ck";
+        }else{
+            redirectAttributes.addFlashAttribute("success",true);
+            return "redirect:/ck/show/"+id;
+        }
     }
 }
