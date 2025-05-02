@@ -26,6 +26,7 @@ public class CategoryController {
         model.addAttribute("category", categoryService.getById(id));
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("comicForm", new ComicDTO());
+        model.addAttribute("descuento", categoryService.wdfgskj)
         return "getCategory";
     }
 
