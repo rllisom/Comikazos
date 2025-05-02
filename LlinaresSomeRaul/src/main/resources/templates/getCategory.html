@@ -27,7 +27,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <!-- Alert para modificación exitosa de categoría -->
-    <div th:if="${done}" class="alert alert-success alert-dismissible fade show" role="alert">
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
         Categoría modificada correctamente.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <header class="text-center mb-5">
+    <div class="text-center mb-5">
         <h1 class="display-5 fw-bold text-primary mb-3" th:text="${category.name}"></h1>
         <p class="lead text-muted" th:if="${not #lists.isEmpty(category.listComic)}">
             Mostrando <span th:text="${category.listComic.size()}"></span> cómics en esta colección
@@ -184,15 +184,15 @@
                     <h5 class="modal-title"><i class="bi bi-building me-2"></i>Nuevo nombre de la editorial</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST" th:action="@{/ck/category/modyfy/{id}(id=${category.id})}" >
+                <form method="POST" th:action="@{/ck/category/modify/{id}(id=${category.id})}" >
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nuevo nombre de la editorial</label>
-                            <input type="text" th:field="${category.name}" th:text="${category.name}" class="form-control" placeholder="Introduzca el nombre" required>
+                            <input type="text" th:field="${category.name}"  class="form-control" placeholder="Introduzca el nombre" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary me-1" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
@@ -225,21 +225,6 @@
 
             </div>
         </div>
-    </div>
-    <!-- Alert para error en la eliminación de categoría -->
-    <div th:if="${done != null and !done}" class="alert alert-danger alert-dismissible fade show" role="alert">
-        Error al eliminar la categoría.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <!-- Alert para error en la modificación de categoría -->
-    <div th:if="${success != null and !success}" class="alert alert-danger alert-dismissible fade show" role="alert">
-        Error al modificar la categoría.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <!-- Alert para modificación exitosa de categoría -->
-    <div th:if="${done}" class="alert alert-success alert-dismissible fade show" role="alert">
-        Categoría modificada correctamente.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </main>
 

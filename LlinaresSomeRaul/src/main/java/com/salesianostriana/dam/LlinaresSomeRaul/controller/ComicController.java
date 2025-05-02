@@ -15,6 +15,7 @@ import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.service.CategoryService;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.ComicService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/ck")
@@ -51,4 +52,15 @@ public class ComicController {
 		return "redirect:/ck";
 	}
 
+	//DELETE
+	@PostMapping("/comic/delete/{id}")
+	public String deleteComic(@PathVariable Long id, RedirectAttributes redirectAttributes){
+		if(comicService.deleteComic(id)){
+			redirectAttributes.addFlashAttribute("doneComic",true);
+			return "redirect:/ck";
+		}else{
+			redirectAttributes.addFlashAttribute("doneComic",true);
+			return "redirect:/ck/comic/"+id;
+		}
+	}
 }

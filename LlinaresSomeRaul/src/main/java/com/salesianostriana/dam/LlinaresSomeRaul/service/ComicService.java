@@ -67,7 +67,16 @@ public class ComicService extends BaseService<Comic,Long,ComicRepository> {
 			return save(ComicDTO.buildComic(dto,cat));
 		}
 
+	}
 
+	//DELETE COMIC
+	public boolean deleteComic(Long id) {
+		if (findById(id) != null) {
+			delete(findById(id));
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

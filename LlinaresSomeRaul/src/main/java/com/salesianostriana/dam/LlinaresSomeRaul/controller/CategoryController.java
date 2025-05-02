@@ -49,7 +49,7 @@ public class CategoryController {
             redirectAttributes.addFlashAttribute("done",true);
             return "redirect:/ck";
         }else{
-            redirectAttributes.addFlashAttribute("done",true);
+            redirectAttributes.addFlashAttribute("done",false);
             return "redirect:/ck/show/"+id;
         }
     }
@@ -57,11 +57,11 @@ public class CategoryController {
     //MODIFY NAME
     @PostMapping("/category/modify/{id}")
     public String modifyCategory(@PathVariable Long id, String name, RedirectAttributes redirectAttributes){
-        if(categoryService.deleteCategory(id)){
+        if(categoryService.modifyCategory(id,name)){
             redirectAttributes.addFlashAttribute("success",true);
-            return "redirect:/ck";
+            return "redirect:/ck/show/"+id;
         }else{
-            redirectAttributes.addFlashAttribute("success",true);
+            redirectAttributes.addFlashAttribute("success",false);
             return "redirect:/ck/show/"+id;
         }
     }

@@ -11,15 +11,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <title>COMIKAZOS!</title>
+
 </head>
 <body class="bg-light">
     <header th:replace="~{fragments/header::header}"></header>
     <main class="py-5">
+        <!-- Alert para error en la eliminación de comic -->
+    <div th:if="${doneComic != null and !doneComic}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al eliminar el cómic.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Alert para error en la modificación de categoría -->
+    <div th:if="${success != null and !success}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        Error al modificar el cómic.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <!-- Alert para modificación exitosa de categoría -->
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        Cómic modificado correctamente.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
         <div class="container">
-            <div class="row g-5">
+            <div class="dropdown">
+                <button class="btn btn-outline-dark dropdown-toggle my-3 float-end" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-gear-fill"></i> Administrar
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item text-primary" type="button" data-bs-toggle="modal" data-bs-target="#modComicModal">
+                        <i class="bi bi-pencil-square me-2"></i>Editar cómic
+                    </a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteComic">
+                        <i class="bi bi-trash3 me-2"></i>Eliminar cómic
+                    </a></li>
+                </ul>
+            </div>
+            <div class="row g-5 d-flex align-items-stretch">
                 <!-- Columna de la imagen -->
-                <div class="col-md-6">
-                    <div class="bg-white p-3 shadow-sm rounded-3">
+                <div class="col-md-6 d-flex">
+                    <div class="bg-white p-3 shadow-sm rounded-3 w-100">
                         <img th:src="${comic.url}" 
                             alt="Portada del cómic" 
                             class="img-fluid rounded-2"
@@ -28,10 +58,10 @@
                 </div>
 
                 <!-- Columna de detalles -->
-                <div class="col-md-6">
-                    <div class="bg-white p-4 rounded-3 shadow-sm">
+                <div class="col-md-6 d-flex">
+                    <div class="bg-white p-4 rounded-3 shadow-sm w-100">
                         <h1 class="mb-3 fw-bold display-5" th:text="${comic.name}"></h1>
-                        
+                        <h4 class="mb-5 fw-bold display-5 text-primary" th:text="${comic.category.name}"></h4>
                         <div class="mb-4">
                             <h3 class="mb-3 text-primary">
                                 <i class="bi bi-card-text me-2"></i>Descripción
@@ -52,6 +82,10 @@
                                     <p class="h4 fw-bold text-success" th:text="${'€' + comic.price}"></p>
                                 </div>
                             </div>
+                            <div  class="border-start border-3 border-primary ps-3">
+                                <h5 class="text-uppercase text-black fw-bold mb-1">Fecha de lanzamiento</h5>
+                                <p class="h5 text-success" th:text="${comic.dat}"></p>
+                            </div>
                         </div>
 
                         <div class="d-grid gap-3">
@@ -63,6 +97,33 @@
                 </div>
             </div>
         </div>
+        <!-- Modal de eliminar cómic -->
+    <div class="modal fade" id="deleteComic" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <form th:action="@{/ck/comic/delete/{id}(id=${comic.id})}" method="POST">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title">Eliminar cómic</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body text-center">
+                        <p>¿Estás seguro de que deseas eliminar este cómic?</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-danger w-100">Sí</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-success w-100" data-bs-dismiss="modal">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>

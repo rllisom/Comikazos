@@ -19,11 +19,16 @@
             Categoría eliminada correctamente.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        <!-- Alert para eliminación exitosa de comic -->
+        <div th:if="${doneComic}" class="alert alert-success alert-dismissible fade show" role="alert">
+            Cómic eliminado correctamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <!-- Sección Editoriales -->
         <section class="container-lg my-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2 class="fw-bold mb-0 text-center">Editoriales</h2>
-                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
+                <button type="button" class="btn btn-success rounded-pill" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
                     <i class="bi bi-plus-lg me-2"></i>Nueva Editorial
                 </button>
             </div>
@@ -35,9 +40,9 @@
             <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
                 <div class="col" th:each="category : ${categories}" th:if="${category.id}!=0" >
                     <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark">
-                        <div class="card h-100 shadow-hover border-0">
+                        <div class="card h-100 shadow-hover border-4">
                             <div class="card-body text-center d-flex flex-column justify-content-center">
-                                <i class="bi bi-building display-5 text-primary mb-3"></i>
+                                <i class="bi bi-book display-5 text-success mb-3"></i>
                                 <h5 class="card-title fw-bold mb-0" th:text="${category.name}"></h5>
                                 <small class="text-muted">Ver colección</small>
                             </div>
