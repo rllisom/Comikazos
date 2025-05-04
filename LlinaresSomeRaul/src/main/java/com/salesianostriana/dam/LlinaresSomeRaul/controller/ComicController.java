@@ -5,11 +5,7 @@ import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 
@@ -42,6 +38,8 @@ public class ComicController {
 	@GetMapping("/comic/{id}")
 	public String getComic(@PathVariable Long id, Model model){
 		model.addAttribute("comic", comicService.getByid(id));
+		model.addAttribute("comicDTO", ComicDTO.buildComicDTO(comicService.getByid(id)));
+		model.addAttribute("categories", categoryService.getAll());
 		return "getComic";
 	}
 
@@ -52,14 +50,26 @@ public class ComicController {
 		return "redirect:/ck";
 	}
 
-	//DELETE
+	//DELETE COMIC
 	@PostMapping("/comic/delete/{id}")
 	public String deleteComic(@PathVariable Long id, RedirectAttributes redirectAttributes){
 		if(comicService.deleteComic(id)){
 			redirectAttributes.addFlashAttribute("doneComic",true);
 			return "redirect:/ck";
 		}else{
-			redirectAttributes.addFlashAttribute("doneComic",true);
+			redirectAttributes.addFlashAttribute("doneComic",false);
+			return "redirect:/ck/comic/"+id;
+		}
+	}
+
+	//EDIT COMIC
+	@PostMapping("/comic/edit/{id}")
+	public String editComic(@PathVariable Long id, ComicDTO dto, RedirectAttributes redirectAttributes){
+		if(comicService.editComic(id,dto)){
+			redirectAttributes.addFlashAttribute("doneEdit",true);
+			return "redirect:/ck/comic/"+id;
+		}else{
+			redirectAttributes.addFlashAttribute("doneEdit",false);
 			return "redirect:/ck/comic/"+id;
 		}
 	}

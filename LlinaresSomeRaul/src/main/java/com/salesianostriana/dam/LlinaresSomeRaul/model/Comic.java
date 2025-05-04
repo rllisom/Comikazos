@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity 
@@ -26,6 +27,7 @@ public class Comic {
 	private int sales;
 	private int pages;
 	private double review;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
 	private String url;
 	@ManyToOne

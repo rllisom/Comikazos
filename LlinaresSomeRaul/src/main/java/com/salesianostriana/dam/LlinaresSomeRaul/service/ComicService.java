@@ -79,4 +79,32 @@ public class ComicService extends BaseService<Comic,Long,ComicRepository> {
 		}
 	}
 
+	//EDIT COMIC
+	public boolean editComic(Long id, ComicDTO dto){
+		Comic original = findById(id);
+		Comic editComic = ComicDTO.buildComic(dto,categoryService.findById(dto.getCategory_id()));
+		editComic.setId(id);
+		boolean exist = findAll().stream()
+				.anyMatch(c-> c.getName().equalsIgnoreCase(editComic.getName()) &&
+						c.getSyn().equalsIgnoreCase(editComic.getSyn()) &&
+						c.getPrice()==editComic.getPrice() &&
+						c.getSales()==editComic.getSales() &&
+						c.getPages()==editComic.getPages() &&
+						c.getReview()==editComic.getReview() &&
+						c.getDat().equals(editComic.getDat()) &&
+						c.getUrl().equalsIgnoreCase(editComic.getUrl()) &&
+						c.getCategory().equals(editComic.getCategory())
+				);
+
+		if (original.equals(editComic)){
+			return false;
+		}
+
+		if(exist){
+			return false;
+		}
+		edit(editComic);
+		return true;
+	}
+
 }

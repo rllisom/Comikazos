@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Builder @Data @NoArgsConstructor @AllArgsConstructor
@@ -19,6 +20,7 @@ public class ComicDTO {
 	private int sales;
 	private int pages;
 	private double review;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
 	private String url;
 	private Long category_id;
@@ -36,6 +38,20 @@ public class ComicDTO {
 				.dat(dto.getDat())
 				.url(dto.getUrl())
 				.category(cat)
+				.build();
+	}
+
+	public static ComicDTO buildComicDTO(Comic c){
+		return ComicDTO.builder()
+				.name(c.getName())
+				.syn(c.getSyn())
+				.price(c.getPrice())
+				.sales(c.getSales())
+				.pages(c.getPages())
+				.review(c.getReview())
+				.dat(c.getDat())
+				.url(c.getUrl())
+				.category_id(c.getCategory().getId())
 				.build();
 	}
 }
