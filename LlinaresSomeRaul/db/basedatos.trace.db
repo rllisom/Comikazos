@@ -5031,3 +5031,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/r.llinare
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 54 more
+2025-05-05 10:41:47.034906+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "SYN CHARACTER VARYING(255)": "'The world of Batman: White Knight continues to expand in this exciting new mini... (261)"
+Value too long for column "SYN CHARACTER VARYING(255)": "'The world of Batman: White Knight continues to expand in this exciting new mini... (261)"; SQL statement:
+insert into comic (category_id,dat,name,pages,price,review,sales,syn,url,id) values (?,?,?,?,?,?,?,?,?,?) [22001-232]

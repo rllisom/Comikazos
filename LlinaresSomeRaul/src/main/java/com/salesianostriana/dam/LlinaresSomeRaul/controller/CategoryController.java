@@ -31,15 +31,17 @@ public class CategoryController {
 
     //ADD NEW CATEGORY
     @PostMapping("/addCat")
-    public String addCat(@ModelAttribute ("catForm") CategoryDTO dto, Model model){
+    public String addCat(@ModelAttribute ("catForm") CategoryDTO dto, RedirectAttributes redirectAttributes){
         Category add = categoryService.addCategory(dto);
 
         if(add==null){
-            model.addAttribute("error", "Ya existe una categoría con ese nombre");
-            return "alert";
+            redirectAttributes.addFlashAttribute("categoryAdd",false);
+            return "redirect:/ck";
+        }else {
+            redirectAttributes.addFlashAttribute("categoryAdd",true);
+            return "redirect:/ck";
         }
-        System.out.println(add);
-        return "redirect:/ck";
+
     }
 
     //DELETE

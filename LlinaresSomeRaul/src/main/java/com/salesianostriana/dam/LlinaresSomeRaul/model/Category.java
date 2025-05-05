@@ -3,10 +3,7 @@ package com.salesianostriana.dam.LlinaresSomeRaul.model;
 import java.util.List;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data 
 @AllArgsConstructor 
@@ -20,6 +17,9 @@ public class Category {
     private Long id;
 
     private String name;
-    @OneToMany(mappedBy = "category")
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<Comic> listComic;
 }

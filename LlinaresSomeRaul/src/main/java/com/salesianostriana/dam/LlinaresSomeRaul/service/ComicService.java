@@ -24,7 +24,7 @@ public class ComicService extends BaseService<Comic,Long,ComicRepository> {
 
 
 	private final CategoryService categoryService;
-
+	private final ComicRepository comicRepository;
 	
 	//GET ALL
 	public List<Comic> getAll(){
@@ -106,5 +106,11 @@ public class ComicService extends BaseService<Comic,Long,ComicRepository> {
 		edit(editComic);
 		return true;
 	}
+
+	//SEARCH
+	public List<Comic> searchComics( String query){
+		return comicRepository.findByNameContainingIgnoreCase(query);
+	}
+
 
 }

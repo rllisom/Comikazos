@@ -14,13 +14,23 @@
     <header th:replace="~{fragments/header::header}"></header>
 
     <main class="py-5">
+        <!-- Alert para creacion exitosa de categoría -->
+        <div th:if="${categoryAdd}" class="alert alert-success alert-dismissible fade show mx-2" role="alert">
+            Categoría creada correctamente.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!-- Alert para creacion  de categoría con error -->
+        <div th:if="${categoryAdd != null and !categoryAdd}" class="alert alert-danger alert-dismissible fade show mx-2" role="alert">
+            Error al crear la categoría.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <!-- Alert para eliminación exitosa de categoría -->
-        <div th:if="${done}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <div th:if="${done}" class="alert alert-success alert-dismissible fade show mx-2" role="alert">
             Categoría eliminada correctamente.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <!-- Alert para eliminación exitosa de comic -->
-        <div th:if="${doneComic}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <div th:if="${doneComic}" class="alert alert-success alert-dismissible fade show mx-2" role="alert">
             Cómic eliminado correctamente.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
@@ -105,7 +115,7 @@
                 <div class="col" th:each="list : ${comicList}">
                     <div class="card h-100 border-0 shadow-sm position-relative">
                         <span th:if="${list.sales > 100}" class="badge bg-danger position-absolute top-0 start-0 m-2">Popular</span>
-                        <img th:src="${list.url}" class="card-img-top object-fit-cover" style="height: 300px;" 
+                        <img th:src="${list.url}" class="card-img-top w-100 img-fluid object-fit-cover" style="height: 300px;" 
                             alt="Portada del cómic">
                         <div class="card-body">
                             <h6 class="card-title fw-bold mb-1" th:text="${list.name}"></h6>

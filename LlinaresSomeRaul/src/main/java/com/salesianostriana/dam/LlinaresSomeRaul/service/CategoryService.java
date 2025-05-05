@@ -36,7 +36,7 @@ public class CategoryService extends BaseService<Category,Long,CategoryRepositor
     public Category addCategory(CategoryDTO dto) {
 
         boolean exist = findAll().stream()
-                .anyMatch(c -> c.getName().equalsIgnoreCase(dto.getName()));
+                .anyMatch(c -> c.getName().trim().equalsIgnoreCase(dto.getName().trim()));
 
         if (exist) {
             return null;
@@ -64,7 +64,7 @@ public class CategoryService extends BaseService<Category,Long,CategoryRepositor
     public boolean modifyCategory(Long id,String name){
         Category modCat = findById(id);
         boolean exist = findAll().stream()
-                .anyMatch(c -> c.getName().equalsIgnoreCase(name));
+                .anyMatch(c -> c.getName().trim().equalsIgnoreCase(name.trim()));
         if(modCat!=null && !exist){
             modCat.setName(name);
             edit(modCat);

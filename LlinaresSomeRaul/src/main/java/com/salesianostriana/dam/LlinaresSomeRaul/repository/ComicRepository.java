@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface ComicRepository extends JpaRepository<Comic, Long>{
 
-    @Query("SELECT c FROM Comic c WHERE LOWER(c.name) LIKE LOWER(CONCAT('%', :name, '%'))")
-    List<Comic> findByName(@Param("name") String name);
+    List<Comic> findByNameContainingIgnoreCase(String name);
+
+
 }

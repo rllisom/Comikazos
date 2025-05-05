@@ -33,4 +33,9 @@ public class Comic {
 	@ManyToOne
 	private Category category;
 
+	//HELPERS
+
+	public void addToCategory(){
+
+	}
 }
