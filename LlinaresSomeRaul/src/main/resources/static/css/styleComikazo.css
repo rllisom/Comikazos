@@ -1,0 +1,20 @@
+.portadaImagen{
+            max-height: 70vh; 
+            object-fit: contain;
+        }
+
+.cardImg{
+    height: 300px;
+}
+
+.card{
+    overflow: hidden;
+}
+
+.card-img-top{
+        transition: transform 0.3s ease;
+    }
+
+.card:hover .card-img-top{
+        transform: scale(1.05);
+    }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../static/css/styleComikazo.css" th:href="@{/css/styleComikazo.css}">
     <title>COMIKAZOS!</title>
 </head>
 <body>
@@ -17,23 +18,19 @@
         <img class="w-100 portada" style="height: 250px;" th:src="@{/img/banner_comikazos.png}" alt="Comikazos!">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a th:href="@{/ck}" class="navbar-brand">COMIKAZOS</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="menu">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="">Catálogo</a></li>
-                        <li class="nav-item">
-                            <form th:action="@{/ck/comic/search}" method="GET">
-                                <input type="text" id="search" placeholder="Buscar cómic" name="query" required minlength="1" maxlength="50">
-                                <button type="submit"><i class="bi bi-search"></i></button>
-                            </form>
-                        </li>
-                    </ul>
+                    <a th:href="@{/ck}" class="navbar-brand">COMIKAZOS</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse justify-content-center" id="menu">
+                    <form th:action="@{/ck/comic/search}" method="GET" class="d-flex w-50" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar cómic" aria-label="Buscar" name="query" required minlength="1" maxlength="50">
+                        <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
                 </div>
             </div>
         </nav>
+
     </header>
 </body>
 </html>
