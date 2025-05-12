@@ -73,8 +73,8 @@
 
     <div th:if="${not #lists.isEmpty(category.listComic)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         <div class="col" th:each="list : ${category.listComic}">
-            <div class="card h-100 border-0 shadow-sm transition-all hover-shadow">
-                <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-0 shadow-sm">
+                <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none">
                     <div class="position-relative">
                         <img th:src="${list.url}" alt="Portada" 
                             class="card-img-top mt-2 object-fit-cover cardImg">
@@ -88,7 +88,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="badge bg-primary" th:text="${list.category.name}"></span>
                             <span class="text-success fw-bold">
-                            <span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>€
+                                <span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>€
                             </span>
                         </div>
                     </div>
