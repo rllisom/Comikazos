@@ -23,6 +23,7 @@ public class ComicDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
 	private String url;
+	private String textImg;
 	private Long category_id;
 
 
@@ -37,6 +38,7 @@ public class ComicDTO {
 				.review(dto.getReview())
 				.dat(dto.getDat())
 				.url(dto.getUrl())
+				.textImg(dto.getTextImg())
 				.category(cat)
 				.build();
 	}
@@ -51,6 +53,7 @@ public class ComicDTO {
 				.review(c.getReview())
 				.dat(c.getDat())
 				.url(c.getUrl())
+				.textImg(c.getTextImg())
 				.category_id(c.getCategory().getId())
 				.build();
 	}

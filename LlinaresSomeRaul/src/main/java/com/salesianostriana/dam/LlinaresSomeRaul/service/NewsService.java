@@ -34,4 +34,24 @@ public class NewsService extends BaseService<News,Long, NewsRepository> {
             return false;
         }
     }
+
+    //EDIT
+    public boolean editNews(Long id, News news){
+        News original = findById(id);
+        news.setId(id);
+        boolean exist = findAll().stream()
+                .anyMatch(n->n.getDateNew().equals(news.getDateNew()) &&
+                        n.getImgNew().equalsIgnoreCase(news.getImgNew()) &&
+                        n.getTextImg().equalsIgnoreCase(news.getTextImg()) &&
+                        n.getTitle().equalsIgnoreCase(news.getDescription()));
+
+        if(original.equals(news)){
+            return false;
+        }
+        if(exist){
+            return false;
+        }
+        edit(news);
+        return true;
+    }
 }

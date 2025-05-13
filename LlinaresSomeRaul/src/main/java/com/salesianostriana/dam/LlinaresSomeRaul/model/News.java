@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.model;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,6 +20,7 @@ public class News {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateNew;
     private String imgNew;
+    private String textImg;
     private String title;
     private String description;
 }

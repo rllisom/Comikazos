@@ -30,6 +30,7 @@ public class Comic {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
 	private String url;
+	private String textImg;
 	@ManyToOne
 	private Category category;
 
