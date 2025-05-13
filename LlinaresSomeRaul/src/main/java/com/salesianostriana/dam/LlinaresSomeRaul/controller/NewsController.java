@@ -1,18 +1,16 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.controller;
 
+import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.News;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.NewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@Controller
 @RequestMapping("/ck")
+@Controller
 public class NewsController {
 
     private final NewsService newsService;
@@ -46,4 +44,10 @@ public class NewsController {
         return "redirect:/ck/news";
     }
 
+    //ADD
+    @PostMapping("/addNews")
+    public String addNews(@ModelAttribute("newsForm") News n){
+        newsService.addNews(n);
+        return "redirect:/ck/news";
+    }
 }

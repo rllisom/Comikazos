@@ -39,7 +39,16 @@ public class ComicController {
 		model.addAttribute("newsList",newsService.getSomeNews());
 		return "principal";
 	}
-	
+
+	//GET ALL
+	@GetMapping("/comics")
+	public String getAll(Model model){
+		model.addAttribute("comicList",comicService.getAll());
+		model.addAttribute("categories", categoryService.getAll());
+		model.addAttribute("comicForm", new ComicDTO());
+		return "AllComics";
+	}
+
 	//GET BY ID
 	@GetMapping("/comic/{id}")
 	public String getComic(@PathVariable Long id, Model model){

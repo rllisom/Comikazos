@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.service;
 
+import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.News;
 import com.salesianostriana.dam.LlinaresSomeRaul.repository.NewsRepository;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseService;
@@ -15,7 +16,9 @@ public class NewsService extends BaseService<News,Long, NewsRepository> {
 
     //GET ALL
     public List<News> getAll(){
-        return findAll();
+        return findAll().stream()
+                .sorted(Comparator.comparing(News::getDateNew).reversed())
+                .toList();
     }
     //GET 3 NEWS
     public List<News> getSomeNews(){
@@ -53,5 +56,20 @@ public class NewsService extends BaseService<News,Long, NewsRepository> {
         }
         edit(news);
         return true;
+    }
+
+    //ADD
+    public News addNews (News news){
+        boolean exist = findAll().stream()
+                .anyMatch(n->n.getDateNew().equals(news.getDateNew()) &&
+                        n.getImgNew().equalsIgnoreCase(news.getImgNew()) &&
+                        n.getTextImg().equalsIgnoreCase(news.getTextImg()) &&
+                        n.getTitle().equalsIgnoreCase(news.getDescription()));
+
+        if (exist) {
+            return null;
+        } else {
+            return save(news);
+        }
     }
 }

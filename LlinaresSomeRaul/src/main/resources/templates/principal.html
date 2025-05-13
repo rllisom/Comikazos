@@ -160,7 +160,9 @@
                     <div class="card h-100 border-0 shadow-sm">
                         <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none">
                             <div class="position-relative">
-                                <img th:src="${list.url}" class="card-img-top w-100 img-fluid object-fit-cover cardImg" th:alt="${list.textImg}">
+                                <div class="comic-img-container">
+                                    <img th:src="${list.url}" class="card-img-top w-100 img-fluid object-fit-cover cardImg" th:alt="${list.textImg}">
+                                </div>
                                 <span th:if="${list.sales > 100}" class="badge bg-danger position-absolute top-0 start-0 m-2"><i class="bi bi-fire me-1"></i>Popular</span>
                             </div>
                             <div class="card-body">

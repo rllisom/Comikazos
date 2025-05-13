@@ -22,7 +22,7 @@
                 <i class="bi bi-newspaper me-2"></i>Noticias del Mundo del Cómic
             </h2>
             
-            <div class="me-auto mt-5">
+            <div class="ms-auto my-4">
             <button type="button" 
                     class="btn btn-primary rounded-pill px-4 py-2 " 
                     data-bs-toggle="modal" 
@@ -142,37 +142,40 @@
                 </div>
             </div>
         </section>
-        <!-- Modal Comic -->
+        <!-- Modal agregar noticia -->
         <div class="modal fade" id="addNewsModal" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-dark text-white">
-                        <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nuevo Cómic</h5>
+                        <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nueva noticia</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                         <form method="POST" th:action="@{/ck/addNews}" th:object="${newsForm}" class="needs-validation" novalidate>
                             <div class="modal-body">
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" th:field="${news.title}" required>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" th:field="*{title}" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" th:field="*{dateNew}" required>
+                                    </div>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" th:field="${news.dateNew}" required>
-                                </div>
-
-                                <div class="col-12">
+                        
+                                <div class="mb-3">
                                     <label class="form-label fw-semibold">Descripción <span class="text-danger">*</span></label>
-                                    <textarea th:text="${news.description}" class="form-control" th:field="${news.description}" required rows="3"></textarea>
+                                    <textarea class="form-control" th:field="*{description}" required rows="3"></textarea>
                                 </div>
-                                <div class="col-12">
+                        
+                                <div class="mb-3">
                                     <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
-                                    <input type="url" class="form-control" th:fielde="${news.imgNew}" required>
+                                    <input type="url" class="form-control" th:field="*{imgNew}" required>
                                 </div>
-                                <div class="col-12">
+                        
+                                <div class="mb-3">
                                     <label class="form-label fw-semibold">Texto alternativo <span class="text-danger">*</span></label>
-                                    <textarea class="form-control"  th:field="${news.textImg}" required rows="3" ></textarea>
+                                    <textarea class="form-control" th:field="*{textImg}" required rows="2"></textarea>
                                 </div>
                             </div>
                     
