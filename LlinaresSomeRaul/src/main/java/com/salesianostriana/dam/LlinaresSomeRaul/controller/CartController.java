@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 @Controller
 public class CartController {
 
+    private final CartItemService cartItemService;
     private final ComicService comicService;
 
     //ADD COMIC TO CART
@@ -33,7 +35,7 @@ public class CartController {
         cartService.addToCart(c);
         session.setAttribute("cartService", cartService);
 
-        return "redirect:/ck";
+        return "redirect:/ck/comics";
 
     }
 
@@ -52,4 +54,16 @@ public class CartController {
 
         return "cart";
     }
+
+    //DELETE
+    @PostMapping("/cart/delete/{id}")
+    public String deleteCart(@PathVariable Long id, HttpSession session){
+        CartItemService cartService = (CartItemService) session.getAttribute("cartService");
+
+        if (cartService != null) {
+            cartService.deleteFromCart(id);
+        }
+        return "redirect:/ck/cart";
+    }
+
 }

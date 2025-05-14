@@ -58,7 +58,7 @@
         <p class="lead text-muted" th:if="${not #lists.isEmpty(category.listComic)}">
             Mostrando <span th:text="${category.listComic.size()}"></span> cómics en esta colección
         </p>
-    </header>
+    </div>
 
     <!-- Lista de cómics -->
     <section>
@@ -96,15 +96,32 @@
                         </div>
                     </div>
                 </a>
-                <div class="card-footer">
+                <div class="card-footer mt-auto border-top-0 bg-transparent">
                     <div class="d-grid gap-3">
-                        <form th:action="@{ck/cart/add/{id}(id = ${list.id})}" method="GET" class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-lg btn-primary py-3">
+                            <button type="button" class="btn btn-lg btn-primary py-3" th:attr="data-bs-toggle='modal', data-bs-target='#aniadir__' + ${list.id}">
                                 <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
                             </button>
-                        </form> 
                     </div>
                 </div>
+                <!-- Modal de producto añadido -->
+                    <div class="modal fade" th:id="'aniadir__' + ${list.id}" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content text-center">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">¡Éxito!</h5>
+                                    <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
+                                </div>
+                                <div class="modal-body">
+                                    <p>Producto añadido a la cesta 🛒</p>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <form th:action="@{/ck/cart/add/{id}(id=${list.id})}" method="GET">
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Seguir comprando</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -242,6 +259,7 @@
             </div>
         </div>
     </div>
+    
 </main>
 
 <footer th:replace="~{fragments/footer::footer}"></footer>

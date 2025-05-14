@@ -18,21 +18,49 @@
 
     <header th:replace="~{fragments/header::header}"></header>
     <main>
-        <h3>Tu carrito</h3>
-                <ul class="list-group">
-                    <li class="list-group-item" th:if="${#lists.isEmpty(cart)}">
+        
+                <div class="container my-5">
+                    <h2 class="fw-bold mb-4 text-center">🛒 Tu carrito</h2>
+
+                    <div th:if="${#lists.isEmpty(cart)}" class="alert alert-warning text-center">
                         Tu carrito está vacío.
-                    </li>
-                    
-                    <li class="list-group-item" th:each="item : ${cart}" th:if="${not #lists.isEmpty(cart)}">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span th:text="${item.c.name}">Título del cómic</span>
-                            <span th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'">Precio</span>
+                    </div>
+
+                    <div th:if="${not #lists.isEmpty(cart)}">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-bordered table-hover bg-white shadow-sm">
+                                <thead class="table-dark">
+                                    <tr class="text-center">
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="item : ${cart}" class="text-center">
+                                        <td style="width: 100px;">
+                                            <img th:src="${item.c.url}" th:alt="${item.c.textImg}" class="img-thumbnail" style="max-height: 100px; object-fit: cover;">
+                                        </td>
+                                        <td th:text="${item.c.name}" class="fw-semibold"></td>
+                                        <td th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></td>
+                                        <td>
+                                            <form th:action="@{/ck/cart/delete/{id}(id=${item.id})}" method="POST">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-x-lg"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </li>
-                </ul>
-                <hr>
-                <h4>Total: <span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)} + ' €'">0.00 €</span></h4>
+
+                        <div class="text-end mt-3">
+                            <h4 class="fw-bold">Total: <span th:text="${#numbers.formatDecimal(cartTotal, 1, 2)} + ' €'">0.00 €</span></h4>
+                        </div>
+                    </div>
+                </div>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>

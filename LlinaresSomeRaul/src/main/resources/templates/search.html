@@ -18,11 +18,18 @@
     <header th:replace="~{fragments/header::header}"></header>
     <main class="py-5">
         <div class="container">
+            
+            <div class="text-center mb-5">
+                
+                <p class="lead text-muted text-center">
+                    Resultados de busqueda: <span th:text="${comics.size()}"></span>
+                </p>
+            </div>
+
             <section>
                 <div th:if="${#lists.isEmpty(comics)}" class="alert alert-danger text-center">
                     No se encontraron cómics
                 </div>
-    
                 <div th:if="${not #lists.isEmpty(comics)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
                     <div class="col" th:each="comic : ${comics}">
                         <div class="card h-100 border-0 shadow-sm">
@@ -38,13 +45,32 @@
                                     </div>
                                 </div>
                             </a>
-                            <div class="card-footer">
+                            <div class="card-footer mt-auto bg-transparent border-top-0">
                                 <div class="d-grid gap-3">
-                                    <form th:action="@{ck/cart/add/{id}(id = ${list.id})}" method="GET" class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-lg btn-primary py-3">
+                                    
+                                        <button type="button" class="btn btn-lg btn-primary py-3" th:attr="data-bs-toggle='modal', data-bs-target='#aniadir__' + ${comic.id}">
                                             <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
                                         </button>
-                                    </form> 
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal de producto añadido -->
+                        <div class="modal fade" th:id="'aniadir__' + ${comic.id}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content text-center">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">¡Éxito!</h5>
+                                        <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Producto añadido a la cesta 🛒</p>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <form th:action="@{/ck/cart/add/{id}(id=${comic.id})}" method="GET">
+                                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Seguir comprando</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,6 +79,7 @@
             </section>
         </div>
     </main>
+    
     <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>
 </html>

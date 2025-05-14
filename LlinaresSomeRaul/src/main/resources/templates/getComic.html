@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="d-grid gap-3">
-                            <button class="btn btn-lg btn-primary py-3">
+                            <button class="btn btn-lg btn-primary py-3" data-bs-toggle="modal" data-bs-target="#addCart">
                                 <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
                             </button>
                         </div>
@@ -194,6 +194,25 @@
                         <button type="submit" class="btn btn-success">Editar Cómic</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de producto añadido -->
+    <div class="modal fade" id="addCart" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <h5 class="modal-title">¡Éxito!</h5>
+                    <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
+                </div>
+                <div class="modal-body">
+                    <p>Producto añadido a la cesta 🛒</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <form th:action="@{/ck/cart/add/{id}(id=${comic.id})}" method="GET">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Seguir comprando</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

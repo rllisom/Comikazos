@@ -5,11 +5,13 @@ import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Data @AllArgsConstructor @NoArgsConstructor
+@Service
 public class CartItemService {
 
     private List<CartItem> cart;
