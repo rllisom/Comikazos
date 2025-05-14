@@ -6,21 +6,20 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.salesianostriana.dam.LlinaresSomeRaul.dto.CategoryDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
-import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseService;
-import jakarta.persistence.EntityNotFoundException;
+import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseServiceImpl;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
-import com.salesianostriana.dam.LlinaresSomeRaul.repository.CategoryRepository;
 import com.salesianostriana.dam.LlinaresSomeRaul.repository.ComicRepository;
 
+
 @RequiredArgsConstructor
-@Service 
-public class ComicService extends BaseService<Comic,Long,ComicRepository> {
+@Service
+public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 
 
 	private final CategoryService categoryService;
@@ -111,6 +110,7 @@ public class ComicService extends BaseService<Comic,Long,ComicRepository> {
 	public List<Comic> searchComics( String query){
 		return comicRepository.findByNameContainingIgnoreCase(query);
 	}
+
 
 
 }

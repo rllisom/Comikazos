@@ -40,9 +40,11 @@
                             </a>
                             <div class="card-footer">
                                 <div class="d-grid gap-3">
+                                    <form th:action="@{ck/cart/add/{id}(id = ${list.id})}" method="GET" class="d-flex justify-content-center">
                                         <button type="submit" class="btn btn-lg btn-primary py-3">
                                             <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
                                         </button>
+                                    </form> 
                                 </div>
                             </div>
                         </div>

@@ -1,13 +1,10 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.CategoryDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
-import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseService;
-import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
+import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -16,7 +13,7 @@ import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
 import com.salesianostriana.dam.LlinaresSomeRaul.repository.CategoryRepository;
 
 @Service
-public class CategoryService extends BaseService<Category,Long,CategoryRepository> {
+public class CategoryService extends BaseServiceImpl<Category,Long,CategoryRepository> {
 
     @Autowired
     @Lazy

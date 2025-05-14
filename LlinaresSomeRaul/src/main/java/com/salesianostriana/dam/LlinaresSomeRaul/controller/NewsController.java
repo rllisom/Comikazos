@@ -1,6 +1,5 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.controller;
 
-import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.News;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.NewsService;
 import lombok.RequiredArgsConstructor;
