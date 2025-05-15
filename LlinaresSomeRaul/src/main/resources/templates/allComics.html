@@ -44,6 +44,16 @@
                 <section class="mx-auto">
                     
                         <h2 class="fw-bold my-4 text-center">Todos los cómics</h2>
+                        <div class="w-25 my-3 d-flex justify-content-center">
+                            <form action="/ck/sort" method="GET" >
+                                <select class="form-select" name="sort" onchange="this.form.submit()">
+                                    <option value="" th:selected="${sort == null}">Ordenar por...</option>
+                                    <option th:value="precioAsc" th:selected="${sort == 'precioAsc'}">Precio(Mayor a menor)</option>
+                                    <option th:value="precioDesc" th:selected="${sort == 'precioDesc'}">Precio(Menor a mayor)</option>
+                                    <option th:value="ordenAlf" th:selected="${sort == 'ordenAlf'}">Orden alfabético</option>
+                                </select>
+                            </form>
+                        </div>
                         <button type="button" class="btn btn-primary rounded-pill float-end me-2" data-bs-toggle="modal" data-bs-target="#newComicModal">
                             <i class="bi bi-plus-lg me-2"></i>Nuevo Cómic
                         </button>

@@ -155,9 +155,9 @@
                 No se encontraron cómics
             </div>
             
-            <div th:if="${not #lists.isEmpty(comicList)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div th:if="${not #lists.isEmpty(comicList)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
                 <div class="col" th:each="list : ${comicList}">
-                    <div class="card h-100 border-0 shadow-sm">
+                    <div class="card h-100 border-0 shadow-sm ">
                         <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none">
                             <div class="position-relative">
                                 <div class="comic-img-container">

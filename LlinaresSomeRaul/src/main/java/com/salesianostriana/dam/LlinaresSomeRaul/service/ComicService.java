@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.service;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -111,6 +112,39 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 		return comicRepository.findByNameContainingIgnoreCase(query);
 	}
 
+	//SORT
+	public List<Comic> sortComics (String sort){
+		List<Comic> sortComics;
 
+		if(sort ==null){
+			return findAll();
+		}
+
+		switch (sort){
+			case "precioAsc":
+				sortComics =findAll().stream()
+						.sorted(Comparator.comparingDouble(Comic::getPrice).reversed()).toList();
+				break;
+			case "precioDesc":
+				sortComics =findAll().stream()
+						.sorted(Comparator.comparingDouble(Comic::getPrice)).toList();
+				break;
+			case "ordenAlf":
+				sortComics =findAll().stream()
+						.filter(c->c.getName() != null)
+						.sorted(Comparator.comparing(Comic::getName)).toList();
+				break;
+			default:
+				sortComics=findAll();
+				break;
+		}
+		return sortComics;
+	}
+
+	//DISCOUNT
+//	public double discount(Long id){
+//		Comic c = findById(id);
+//		LocalDate today = LocalDate.now();
+//	}
 
 }

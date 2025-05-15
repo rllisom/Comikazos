@@ -43,10 +43,11 @@ public class ComicController {
 
 	//GET ALL
 	@GetMapping("/comics")
-	public String getAll(Model model){
-		model.addAttribute("comicList",comicService.getAll());
+	public String getAll(@RequestParam(required = false) String sort, Model model){
+		model.addAttribute("comicList",comicService.sortComics(sort));
 		model.addAttribute("categories", categoryService.getAll());
 		model.addAttribute("comicForm", new ComicDTO());
+		model.addAttribute("sort",sort);
 		return "allComics";
 	}
 
@@ -97,4 +98,11 @@ public class ComicController {
 		return "search";
 	}
 
+	//SORT
+	@GetMapping("/sort")
+	public String sortComics(@RequestParam String sort, RedirectAttributes redirectAttributes){
+
+		redirectAttributes.addAttribute("sort",sort);
+		return "redirect:/ck/comics";
+	}
 }
