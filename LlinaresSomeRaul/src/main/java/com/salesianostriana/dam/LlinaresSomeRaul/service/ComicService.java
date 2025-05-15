@@ -1,7 +1,9 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.service;
 
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -95,14 +97,26 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 						c.getUrl().equalsIgnoreCase(editComic.getUrl()) &&
 						c.getCategory().equals(editComic.getCategory())
 				);
+		boolean empty = editComic.getName() == null || editComic.getName().isBlank() ||
+				editComic.getSyn() == null || editComic.getSyn().isBlank() ||
+				editComic.getPrice() == null ||
+				editComic.getSales() == null ||
+				editComic.getPages() == null ||
+				editComic.getReview() == null ||
+				editComic.getDat() == null ||
+				editComic.getUrl() == null || editComic.getUrl().isBlank() ||
+				editComic.getCategory() == null;
 
 		if (original.equals(editComic)){
 			return false;
 		}
-
 		if(exist){
 			return false;
 		}
+	if(empty){
+		return false;
+	}
+
 		edit(editComic);
 		return true;
 	}
@@ -141,10 +155,7 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 		return sortComics;
 	}
 
-	//DISCOUNT
-//	public double discount(Long id){
-//		Comic c = findById(id);
-//		LocalDate today = LocalDate.now();
-//	}
+
+
 
 }

@@ -43,7 +43,21 @@
                                             <img th:src="${item.c.url}" th:alt="${item.c.textImg}" class="img-thumbnail" style="max-height: 100px; object-fit: cover;">
                                         </td>
                                         <td th:text="${item.c.name}" class="fw-semibold"></td>
-                                        <td th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></td>
+                                        <td>
+                                            <div th:if="${item.c.hasDiscount()}">
+                                                <span class="text-muted text-decoration-line-through me-2">
+                                                    <span th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
+                                                </span><br/>
+                                                <span class="text-success fw-bold">
+                                                    <span th:text="${#numbers.formatDecimal(item.c.getDiscount(), 1, 2)} + ' €'"></span>
+                                                </span><br/>
+                                                <span class="badge bg-danger mt-1">-5%</span>
+                                            </div>
+
+                                            <div th:unless="${item.c.hasDiscount()}">
+                                                <span class="text-success fw-bold" th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
+                                            </div>
+                                        </td>
                                         <td>
                                             <form th:action="@{/ck/cart/delete/{id}(id=${item.id})}" method="POST">
                                                 <button type="submit" class="btn btn-danger">

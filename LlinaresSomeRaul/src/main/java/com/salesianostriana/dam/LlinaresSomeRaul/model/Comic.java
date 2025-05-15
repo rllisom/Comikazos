@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,10 @@ public class Comic {
 
 	private String name;
 	private String syn;
-	private double price;
-	private int sales;
-	private int pages;
-	private double review;
+	private Double price;
+	private Integer sales;
+	private Integer pages;
+	private Double review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
 	private String url;
@@ -36,7 +37,19 @@ public class Comic {
 
 	//HELPERS
 
-	public void addToCategory(){
+	//DISCOUNT
+	public double getDiscount(){
+		double rate = 0.95;
 
+
+		if(hasDiscount()){
+			return price*rate;
+		}else{
+			return price;
+		}
+	}
+
+	public boolean hasDiscount() {
+		return dat != null && ChronoUnit.DAYS.between(dat, LocalDate.now()) > 50;
 	}
 }

@@ -41,10 +41,13 @@ public class CartItemService {
         return done;
     }
 
+    //TOTAL
     public double calculateTotal(){
         return cart.stream()
-                .mapToDouble(item -> item.getC().getPrice())
+                .mapToDouble(item -> item.getC().getDiscount())
                 .sum();
     }
+
+
 
 }

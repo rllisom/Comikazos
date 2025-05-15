@@ -16,10 +16,10 @@ public class ComicDTO {
 
 	private String name;
 	private String syn;
-	private double price;
-	private int sales;
-	private int pages;
-	private double review;
+	private Double price;
+	private Integer sales;
+	private Integer pages;
+	private Double review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
 	private String url;
