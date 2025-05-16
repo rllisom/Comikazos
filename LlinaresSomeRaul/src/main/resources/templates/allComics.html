@@ -45,7 +45,7 @@
                     
                         <h2 class="fw-bold my-4 text-center">Todos los cómics</h2>
                         <div class="w-25 my-3 d-flex justify-content-center">
-                            <form action="/ck/sort" method="GET" >
+                            <form th:action="@{/ck/sort}" method="GET" >
                                 <select class="form-select" name="sort" onchange="this.form.submit()">
                                     <option value="" th:selected="${sort == null}">Ordenar por...</option>
                                     <option th:value="precioAsc" th:selected="${sort == 'precioAsc'}">Precio(Mayor a menor)</option>

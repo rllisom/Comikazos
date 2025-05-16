@@ -14,5 +14,25 @@ public interface ComicRepository extends JpaRepository<Comic, Long>{
 
     List<Comic> findByNameContainingIgnoreCase(String name);
 
+    @Query("""
+			select c
+			from Comic c
+			order by c.price ASC
+			""")
+    List<Comic> searchByPriceDesc();
+
+    @Query("""
+			select c
+			from Comic c
+			order by c.price DESC
+			""")
+    List<Comic> searchByPriceAsc();
+
+    @Query("""
+            select c
+			from Comic c
+			order by c.name ASC
+            """)
+    List<Comic> searchByNameAsc();
 
 }

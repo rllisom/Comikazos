@@ -135,22 +135,13 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 		}
 
 		switch (sort){
-			case "precioAsc":
-				sortComics =findAll().stream()
-						.sorted(Comparator.comparingDouble(Comic::getPrice).reversed()).toList();
-				break;
-			case "precioDesc":
-				sortComics =findAll().stream()
-						.sorted(Comparator.comparingDouble(Comic::getPrice)).toList();
-				break;
-			case "ordenAlf":
-				sortComics =findAll().stream()
-						.filter(c->c.getName() != null)
-						.sorted(Comparator.comparing(Comic::getName)).toList();
-				break;
-			default:
-				sortComics=findAll();
-				break;
+			case "precioAsc" -> { sortComics = repositorio.searchByPriceAsc(); }
+
+			case "precioDesc" ->{ sortComics = repositorio.searchByPriceDesc(); }
+
+			case "ordenAlf" -> { sortComics = repositorio.searchByNameAsc();}
+
+			default -> { sortComics = findAll(); }
 		}
 		return sortComics;
 	}

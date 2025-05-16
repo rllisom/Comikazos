@@ -41,7 +41,6 @@ public class Comic {
 	public double getDiscount(){
 		double rate = 0.95;
 
-
 		if(hasDiscount()){
 			return price*rate;
 		}else{

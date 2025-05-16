@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,9 +46,25 @@ public class CartItemService {
     public double calculateTotal(){
         return cart.stream()
                 .mapToDouble(item -> item.getC().getDiscount())
-                .sum();
+                .sum() - discountPriceDC();
     }
 
+    public double discountPriceDC(){
+        double resul = 0.0;
+        List<CartItem> comicsDC =
+                cart.stream()
+                .filter(c->c.getC().getName().equalsIgnoreCase("dc"))
+                        .sorted(Comparator.comparingDouble((CartItem c)->c.getC().getPrice()))
+                        .toList();
+        if(comicsDC.size()>1){
+
+            for (int i = 0; i + 1 < comicsDC.size(); i += 2) {
+                resul += comicsDC.get(i).getC().getPrice(); // El más barato es gratis
+            }
+        }
+
+        return resul;
+    }
 
 
 }
