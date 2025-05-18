@@ -44,25 +44,29 @@ public class CartItemService {
 
     //TOTAL
     public double calculateTotal(){
-        return cart.stream()
+        double total = cart.stream()
                 .mapToDouble(item -> item.getC().getDiscount())
-                .sum() - discountPriceDC();
+                .sum();
+        return total - discountPriceDC();
     }
 
     public double discountPriceDC(){
         double resul = 0.0;
+        int totalItems,freeItems;
         List<CartItem> comicsDC =
                 cart.stream()
-                .filter(c->c.getC().getName().equalsIgnoreCase("dc"))
-                        .sorted(Comparator.comparingDouble((CartItem c)->c.getC().getPrice()))
+                .filter(c->c.getC().getCategory().getName().equalsIgnoreCase("dc"))
+                        .sorted(Comparator.comparingDouble((CartItem c)->c.getC().getDiscount()))
                         .toList();
-        if(comicsDC.size()>1){
 
-            for (int i = 0; i + 1 < comicsDC.size(); i += 2) {
-                resul += comicsDC.get(i).getC().getPrice(); // El más barato es gratis
-            }
-        }
+        totalItems = comicsDC.size();
+        freeItems = totalItems/2;
 
+        resul = comicsDC.stream()
+                .limit(freeItems)
+                .mapToDouble(c->c.getC().getDiscount())
+                .sum();
+        
         return resul;
     }
 
