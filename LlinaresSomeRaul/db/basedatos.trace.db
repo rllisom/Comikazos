@@ -6523,3 +6523,23 @@ INSERT INTO News (id, date_new, img_new, textImg, title, description) VALUES (3,
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
 	at com.salesianostriana.dam.LlinaresSomeRaul.LlinaresSomeRaulApplication.main(LlinaresSomeRaulApplication.java:10)
+2025-05-19 12:49:46.868122+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"
+Value too long for column "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"; SQL statement:
+insert into comic (category_id,dat,name,pages,price,review,sales,syn,text_img,url,id) values (?,?,?,?,?,?,?,?,?,?,?) [22001-232]
+2025-05-19 12:51:14.985690+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"
+Value too long for column "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"; SQL statement:
+insert into comic (category_id,dat,name,pages,price,review,sales,syn,text_img,url,id) values (?,?,?,?,?,?,?,?,?,?,?) [22001-232]
+2025-05-19 12:51:17.939411+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"
+Value too long for column "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"; SQL statement:
+insert into comic (category_id,dat,name,pages,price,review,sales,syn,text_img,url,id) values (?,?,?,?,?,?,?,?,?,?,?) [22001-232]
+2025-05-19 12:52:04.167137+02:00 jdbc[18]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"
+Value too long for column "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"; SQL statement:
+insert into comic (category_id,dat,name,pages,price,review,sales,syn,text_img,url,id) values (?,?,?,?,?,?,?,?,?,?,?) [22001-232]
+2025-05-19 12:52:07.117145+02:00 jdbc[18]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"
+Value too long for column "NAME CHARACTER VARYING(255)": "'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq... (279)"; SQL statement:
+insert into comic (category_id,dat,name,pages,price,review,sales,syn,text_img,url,id) values (?,?,?,?,?,?,?,?,?,?,?) [22001-232]

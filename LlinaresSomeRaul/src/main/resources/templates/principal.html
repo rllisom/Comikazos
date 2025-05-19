@@ -50,7 +50,7 @@
                 No se encontraron editoriales
             </div>
             
-            <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
+            <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
                 <div class="col d-flex justify-content-center" th:each="category : ${categories}" th:if="${category.id} != 0">
                     <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark w-100" style="max-width: 250px;">
                         <div class="card shadow-sm border-2 rounded-3 h-100">
@@ -141,7 +141,56 @@
                 </div>
             </div>
         </section>
-    
+        <!--Ofertas-->
+        <article class="container my-5">
+            <h2 class="fw-bold text-center mb-4">🔥 Ofertas en nuestra tienda</h2>
+
+            <div id="promoCarousel" class="carousel slide w-100 w-md-75 w-lg-50 mx-auto" data-bs-ride="carousel">
+                <div class="carousel-inner rounded shadow-lg">
+
+                    <!-- OFERTA 1: 2x1 en cómics DC -->
+                    <div class="carousel-item active">
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between bg-warning text-dark p-4 rounded">
+                            <div class="text-center w-100">
+                                <h4 class="fw-bold mb-2">2x1 en cómics DC 🦇</h4>
+                                <p class="mb-0">Compra 2 y paga solo 1 en toda la colección DC. ¡Aplica automáticamente!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OFERTA 2: 10% en cómics Marvel -->
+                    <div class="carousel-item">
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between bg-danger text-white p-4 rounded">
+                            <div class="text-center w-100">
+                                <h4 class="fw-bold mb-2">10% en cómics Marvel 🦸‍♂️</h4>
+                                <p class="mb-0">Compra 4 o más y obtén 10% de descuento en tus cómics Marvel favoritos.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OFERTA 3: 5% extra si el total supera los 100€ -->
+                    <div class="carousel-item">
+                        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between bg-success text-white p-4 rounded">
+                            <div class="text-center w-100">
+                                <h4 class="fw-bold mb-2">💰 Descuento por compras grandes</h4>
+                                <p class="mb-0">Si gastas más de 100€, te descontamos un 5% del total final automáticamente.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controles -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </article>
         <!-- Sección Catálogo -->
         <section class="container-lg my-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -155,12 +204,12 @@
                 No se encontraron cómics
             </div>
             
-            <div th:if="${not #lists.isEmpty(comicList)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
+            <div th:if="${not #lists.isEmpty(comicList)}" class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 d-flex justify-content-center">
                 <div class="col" th:each="list : ${comicList}">
                     <div class="card h-100 border-0 shadow-sm ">
                         <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none">
                             <div class="position-relative">
-                                <div class="comic-img-container">
+                                <div class="comic-img-container mx-auto container-fluid">
                                     <img th:src="${list.url}" class="card-img-top w-100 img-fluid object-fit-cover cardImg" th:alt="${list.textImg}">
                                 </div>
                                 <span th:if="${list.sales > 100}" class="badge bg-danger position-absolute top-0 start-0 m-2"><i class="bi bi-fire me-1"></i>Popular</span>
@@ -237,7 +286,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Nombre de la editorial</label>
-                                <input type="text" th:field="*{name}" class="form-control" required>
+                                <input type="text" th:field="*{name}" class="form-control" required maxlength="20" pattern=".{3,}">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -260,10 +309,9 @@
                     <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation" novalidate>
                         <div class="modal-body">
                             <div class="row g-3">
-                                <!-- Campos del formulario mejor organizados -->
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" th:field="*{name}" required>
+                                    <input type="text" class="form-control" th:field="*{name}"required maxlength="100" pattern=".{3,}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Editorial <span class="text-danger">*</span></label>
@@ -276,28 +324,28 @@
                                     <label class="form-label fw-semibold">Precio (€) <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text">€</span>
-                                        <input type="number" step="0.01" class="form-control" th:field="*{price}" required>
+                                        <input type="number" step="0.01" min="0.01" max="999.99" class="form-control" th:field="*{price}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
-                                    <input type="number" class="form-control" th:field="*{pages}" required>
+                                    <input type="number" class="form-control" th:field="*{pages}" required min="1" max="9999">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" th:field="*{dat}" required>
+                                    <input type="date" class="form-control" th:field="*{dat}" required max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" th:field="*{syn}" rows="3" required></textarea>
+                                    <textarea class="form-control" th:field="*{syn}" rows="3" required minlength="10" maxlength="255"></textarea>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold">Texto alternativo de la imagen <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" th:field="*{textImg}" rows="3" required></textarea>
+                                    <textarea class="form-control" th:field="*{textImg}" rows="3" required minlength="10" maxlength="255"></textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
-                                    <input type="url" class="form-control" th:field="*{url}" required>
+                                    <input type="url" class="form-control" th:field="*{url}" required pattern="https?://.+" title="Por favor, introduce una URL válida.">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label fw-semibold">Valoración <span class="text-danger">*</span></label>

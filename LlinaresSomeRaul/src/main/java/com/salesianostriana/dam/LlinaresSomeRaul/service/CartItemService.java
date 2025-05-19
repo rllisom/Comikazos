@@ -44,12 +44,20 @@ public class CartItemService {
 
     //TOTAL
     public double calculateTotal(){
+        double globalDiscount = 0.95;
+        double num = 100;
         double total = cart.stream()
                 .mapToDouble(item -> item.getC().getDiscount())
                 .sum();
-        return total - discountPriceDC();
+        if (total > num){
+            return (total - discountPriceDC() - discountPriceMarvel())*globalDiscount;
+        }else{
+            return total - discountPriceDC() - discountPriceMarvel();
+        }
+
     }
 
+    //Método que cálcula el 2x1 en cómics de DC. De dos cómics de DC, cogemos el más barato que es el que nos saldrá gratis
     public double discountPriceDC(){
         double resul = 0.0;
         int totalItems,freeItems;
@@ -70,5 +78,19 @@ public class CartItemService {
         return resul;
     }
 
+    /*Método que acumula los descuentos de los cómics de Marvel si en el carrito hay más de 3*/
+    public double discountPriceMarvel(){
+        double discount = 0.1;
+        double resul = 0.0;
+        List<CartItem> comicsMarvel = cart.stream()
+                .filter(c->c.getC().getCategory().getName().equalsIgnoreCase("marvel"))
+                .toList();
 
+        if (comicsMarvel.size() > 3){
+            for (CartItem item : comicsMarvel){
+                resul += item.getC().getDiscount()*discount;
+            }
+        }
+        return  resul;
+    }
 }

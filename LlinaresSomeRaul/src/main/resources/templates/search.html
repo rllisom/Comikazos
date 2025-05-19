@@ -30,12 +30,12 @@
                 <div th:if="${#lists.isEmpty(comics)}" class="alert alert-danger text-center">
                     No se encontraron cómics
                 </div>
-                <div th:if="${not #lists.isEmpty(comics)}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
+                <div th:if="${not #lists.isEmpty(comics)}" class="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 justify-content-center ">
                     <div class="col" th:each="comic : ${comics}">
                         <div class="card h-100 border-0 shadow-sm">
                             <a th:href="@{/ck/comic/{id}(id=${comic.id})}" class="text-decoration-none">
-                                <div class="comic-img-container">
-                                    <img th:src="${comic.url}" class="card-img-top object-fit-cover" style="height: 300px;" th:alt="${comic.textImg}">
+                                <div class="comic-img-container mx-auto">
+                                    <img th:src="${comic.url}" class="card-img-top object-fit-cover cardImg" th:alt="${comic.textImg}">
                                 </div>
                                 <div class="card-body">
                                     <h6 class="card-title fw-bold mb-1" th:text="${comic.name}"></h6>
