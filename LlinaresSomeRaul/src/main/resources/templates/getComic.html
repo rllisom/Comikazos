@@ -32,7 +32,7 @@
             Cómic modificado correctamente.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="dropdown text-center text-md-end my-3">
+        <div class="dropdown text-center text-md-end my-3 me-2">
             <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-gear-fill"></i> Administrar
             </button>
@@ -60,9 +60,10 @@
 
                 <!-- Columna de detalles -->
                 <div class="col-md-6 d-flex">
-                    <div class="bg-white p-4 rounded-3 shadow-sm w-100 h-100">
+                    <div class="bg-white p-4 rounded-3 shadow-sm w-100 h-100 d-flex flex-column">
                         <h1 class="mb-3 fw-bold fs-3 fs-md-1" th:text="${comic.name}"></h1>
                         <h4 class="mb-5 fw-bold display-5 text-primary" th:text="${comic.category.name}"></h4>
+
                         <div class="mb-4">
                             <h3 class="mb-3 text-primary">
                                 <i class="bi bi-card-text me-2"></i>Descripción
@@ -94,7 +95,6 @@
                                             <span class="badge bg-danger mt-1">-5%</span>
                                         </div>
                                     </div>
-
                                     <!-- Si NO tiene descuento -->
                                     <div th:unless="${comic.hasDiscount()}">
                                         <span class="text-success fw-bold h3">
@@ -103,13 +103,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div  class="border-start border-3 border-primary ps-3">
+                            <div class="border-start border-3 border-primary ps-3">
                                 <h5 class="text-uppercase text-black fw-bold mb-1">Fecha de lanzamiento</h5>
                                 <p class="h5 text-success" th:text="${comic.dat}"></p>
                             </div>
                         </div>
 
-                        <div class="d-grid gap-3">
+                        <!-- Botón abajo -->
+                        <div class="d-grid gap-3 mt-auto">
                             <button class="btn btn-lg btn-primary py-3" data-bs-toggle="modal" data-bs-target="#addCart">
                                 <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
                             </button>

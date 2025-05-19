@@ -27,10 +27,17 @@ public class ComicController {
 	private final ComicService comicService;
 	private final CategoryService categoryService;
 	private final NewsService newsService;
+	private final CartItemService cartItemService;
 	
 	//GET WEB PPAL
 	@GetMapping(" ")
-	public String getWeb(Model model){
+	public String getWeb(HttpSession session,Model model){
+
+		CartItemService cartService = (CartItemService) session.getAttribute("cartService");
+		if (cartService == null) {
+			cartService = new CartItemService(new ArrayList<>(), 0L, 0L, 0L);
+			session.setAttribute("cartService", cartService);
+		}
 
 		model.addAttribute("catForm",new CategoryDTO());
 		model.addAttribute("comicForm", new ComicDTO());
@@ -38,6 +45,10 @@ public class ComicController {
 		model.addAttribute("comics", comicService.getBest());
 		model.addAttribute("comicList",comicService.getCatalogue());
 		model.addAttribute("newsList",newsService.getSomeNews());
+		model.addAttribute("category2x1",categoryService.findById(cartItemService.getCategory2x1Id()));
+		model.addAttribute("category10Per",categoryService.findById(cartItemService.getCategory10PerId()));
+
+		System.out.println("Categoría 2x1 activa: " + cartService.getCategory2x1Id());
 		return "principal";
 	}
 

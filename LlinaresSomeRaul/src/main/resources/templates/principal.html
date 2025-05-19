@@ -37,34 +37,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-        <!-- Sección Editoriales -->
-        <section class="container-lg my-5">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="fw-bold mb-0 text-center">Editoriales</h2>
-                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
-                    <i class="bi bi-plus-lg me-2"></i>Nueva Editorial
-                </button>
-            </div>
-            
-            <div th:if="${#lists.isEmpty(categories)}" class="alert alert-warning text-center">
-                No se encontraron editoriales
-            </div>
-            
-            <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
-                <div class="col d-flex justify-content-center" th:each="category : ${categories}" th:if="${category.id} != 0">
-                    <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark w-100" style="max-width: 250px;">
-                        <div class="card shadow-sm border-2 rounded-3 h-100">
-                            <div class="card-body text-center d-flex flex-column justify-content-center">
-                                <i class="bi bi-book display-4 text-primary mb-2 w-25 text-center mx-auto"></i>
-                                <h5 class="card-title fw-bold mb-0" th:text="${category.name}"></h5>
-                                <small class="text-muted">Ver colección</small>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
+        
         <!--Sección de noticias -->
         <section class="container-lg my-5">
             <div class="row g-4">
@@ -83,16 +56,16 @@
                 </div>
             <!-- Carrusel de imágenes -->
                 <div class="col-md-6">
-                    <div id="comicCarousel" class="carousel slide shadow-sm" data-bs-ride="carousel">
+                    <div id="comicCarousel" class="carousel slide shadow-sm rounded-4" data-bs-ride="carousel">
                         <div class="carousel-inner rounded-4">
                             <div class="carousel-item active">
-                                <img th:src="@{/img/carrusel_img_1.webp}" class="d-block w-100 carousel-img" alt="Imagen 1">
+                                <img th:src="@{/img/carrusel_img_1.webp}" class="d-block w-100 carousel-img object-fit-cover" alt="Imagen 1">
                             </div>
                             <div class="carousel-item">
-                                <img th:src="@{/img/carrusel_img_2.webp}" class="d-block w-100 carousel-img" alt="Imagen 2">
+                                <img th:src="@{/img/carrusel_img_2.webp}" class="d-block w-100 carousel-img object-fit-cover" alt="Imagen 2">
                             </div>
                             <div class="carousel-item">
-                                <img th:src="@{/img/carrusel_img_3.webp}" class="d-block w-100 carousel-img" alt="Imagen 3">
+                                <img th:src="@{/img/carrusel_img_3.webp}" class="d-block w-100 carousel-img object-fit-cover" alt="Imagen 3">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#comicCarousel" data-bs-slide="prev">
@@ -149,27 +122,27 @@
                 <div class="carousel-inner rounded shadow-lg">
 
                     <!-- OFERTA 1: 2x1 en cómics DC -->
-                    <div class="carousel-item active">
+                    <div class="carousel-item" th:if="${category2x1.id} != 0">
                         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between bg-warning text-dark p-4 rounded">
                             <div class="text-center w-100">
-                                <h4 class="fw-bold mb-2">2x1 en cómics DC 🦇</h4>
-                                <p class="mb-0">Compra 2 y paga solo 1 en toda la colección DC. ¡Aplica automáticamente!</p>
+                                <h4 class="fw-bold mb-2">2x1 en cómics <span th:text="${category2x1.name}"></span> 🦇</h4>
+                                <p class="mb-0">Compra 2 y paga solo 1 en toda la colección <span th:text="${category2x1.name}"></span>. ¡Aplica automáticamente!</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- OFERTA 2: 10% en cómics Marvel -->
-                    <div class="carousel-item">
+                    <div class="carousel-item" th:if="${category10Per.id } != 0">
                         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between bg-danger text-white p-4 rounded">
                             <div class="text-center w-100">
-                                <h4 class="fw-bold mb-2">10% en cómics Marvel 🦸‍♂️</h4>
-                                <p class="mb-0">Compra 4 o más y obtén 10% de descuento en tus cómics Marvel favoritos.</p>
+                                <h4 class="fw-bold mb-2">10% en cómics <span th:text="${category10Per.name}"></span> 🦸‍♂️</h4>
+                                <p class="mb-0">Compra 4 o más y obtén 10% de descuento en tus cómics <span th:text="${category10Per.name}"></span> favoritos.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- OFERTA 3: 5% extra si el total supera los 100€ -->
-                    <div class="carousel-item">
+                    <div class="carousel-item active">
                         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between bg-success text-white p-4 rounded">
                             <div class="text-center w-100">
                                 <h4 class="fw-bold mb-2">💰 Descuento por compras grandes</h4>
@@ -181,7 +154,7 @@
                 </div>
 
                 <!-- Controles -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev"  type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Anterior</span>
                 </button>
@@ -191,6 +164,35 @@
                 </button>
             </div>
         </article>
+
+        <!-- Sección Editoriales -->
+        <section class="container-lg my-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0 text-center">Editoriales</h2>
+                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
+                    <i class="bi bi-plus-lg me-2"></i>Nueva Editorial
+                </button>
+            </div>
+            
+            <div th:if="${#lists.isEmpty(categories)}" class="alert alert-warning text-center">
+                No se encontraron editoriales
+            </div>
+            
+            <div th:if="${not #lists.isEmpty(categories)}" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 d-flex justify-content-center">
+                <div class="col d-flex justify-content-center" th:each="category : ${categories}" th:if="${category.id} != 0">
+                    <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark w-100">
+                        <div class="card shadow-sm border-2 rounded-3 h-100">
+                            <div class="card-body text-center d-flex flex-column justify-content-center">
+                                <i class="bi bi-book display-4 text-primary mb-2 w-25 text-center mx-auto"></i>
+                                <h5 class="card-title fw-bold mb-0" th:text="${category.name}"></h5>
+                                <small class="text-muted">Ver colección</small>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Sección Catálogo -->
         <section class="container-lg my-5">
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -212,7 +214,7 @@
                                 <div class="comic-img-container mx-auto container-fluid">
                                     <img th:src="${list.url}" class="card-img-top w-100 img-fluid object-fit-cover cardImg" th:alt="${list.textImg}">
                                 </div>
-                                <span th:if="${list.sales > 100}" class="badge bg-danger position-absolute top-0 start-0 m-2"><i class="bi bi-fire me-1"></i>Popular</span>
+                                <span th:if="${list.sales > 800}" class="badge bg-danger position-absolute top-0 start-0 m-2"><i class="bi bi-fire me-1"></i>Popular</span>
                             </div>
                             <div class="card-body">
                                 <h6 class="card-title fw-bold mb-1" th:text="${list.name}"></h6>

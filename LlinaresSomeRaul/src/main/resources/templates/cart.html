@@ -21,6 +21,36 @@
         
                 <div class="container my-5">
                     <h2 class="fw-bold mb-4 text-center">🛒 Tu carrito</h2>
+                    <div th:if="${message}" class="alert alert-success alert-dismissible fade show text-center mx-3" role="alert">
+                        <span th:text="${message}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                    </div>
+                    <div class="d-flex justify-content-end mb-4">
+                        <form th:action="@{/ck/cart/discounts}" method="POST" class="d-flex flex-column align-items-end gap-2 w-100 w-md-50">
+                            
+                            <div class="w-25">
+                                <label for="category2x1" class="form-label fw-bold">Editorial con 2x1:</label>
+                                <select id="category2x1" name="category2x1Id" class="form-select">
+                                    <option th:each="cat : ${categories}" th:if="${cat.id} != 0" th:value="${cat.id}" th:text="${cat.name}"
+                                            th:selected="${cat.id == category2x1Id}"></option>
+                                    <option value="0" th:selected="${category2x1Id == 0}">Sin promoción</option>
+                                </select>
+                            </div>
+
+                            <div class="w-25">
+                                <label for="category10Per" class="form-label fw-bold">Editorial con 10%:</label>
+                                <select id="category10Per" name="category10PerId" class="form-select">
+                                    <option th:each="cat : ${categories}" th:if="${cat.id} != 0" th:value="${cat.id}" th:text="${cat.name}"
+                                            th:selected="${cat.id == category10PerId}"></option>
+                                    <option value="0" th:selected="${category10PerId == 0}">Sin promoción</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">
+                                Aplicar Descuentos
+                            </button>
+                        </form>
+                    </div>
 
                     <div th:if="${#lists.isEmpty(cart)}" class="alert alert-warning text-center">
                         Tu carrito está vacío.
