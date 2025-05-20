@@ -32,21 +32,29 @@
             Cómic modificado correctamente.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="dropdown text-center text-md-end my-3 me-2">
-            <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-gear-fill"></i> Administrar
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end shadow">
-                <li><a class="dropdown-item text-primary" type="button" data-bs-toggle="modal" data-bs-target="#modComicModal">
-                    <i class="bi bi-pencil-square me-2"></i>Editar cómic
-                </a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteComic">
-                    <i class="bi bi-trash3 me-2"></i>Eliminar cómic
-                </a></li>
-            </ul>
-        </div>
-        <div class="container-fluid px-2 px-md-5">
+
+        
+        <section class="container-fluid px-2 px-md-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a th:href="@{/ck/comics}" class="btn btn-outline-secondary rounded-pill">
+                    <i class="bi bi-arrow-left-short me-1"></i>Ir al catálogo
+                </a>
+                <div class="dropdown text-center text-md-end my-3 me-2">
+                    <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-gear-fill"></i> Administrar
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <li><a class="dropdown-item text-success" type="button" data-bs-toggle="modal" data-bs-target="#modComicModal">
+                            <i class="bi bi-pencil-square me-2"></i>Editar cómic
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#deleteComic">
+                            <i class="bi bi-trash3 me-2"></i>Eliminar cómic
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="row g-5 d-flex align-items-stretch">
                 <!-- Columna de la imagen -->
                 <div class="col-md-6">
@@ -118,7 +126,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         <!-- Modal de eliminar cómic -->
     <div class="modal fade" id="deleteComic" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -154,7 +162,7 @@
                     <h5 class="modal-title"><i class="bi bi-book me-2"></i>Editar Cómic</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST" th:action="@{/ck/comic/edit/{id}(id=${comic.id})}" th:object="${comicDTO}" class="needs-validation" novalidate>
+                <form method="POST" th:action="@{/ck/comic/edit/{id}(id=${comic.id})}" th:object="${comicDTO}" class="needs-validation">
                     <div class="modal-body">
                         <div class="row g-3">
                             
@@ -178,19 +186,19 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" th:field="*{pages}" required min="1" max="9999">
+                                <input type="number" class="form-control" th:field="*{pages}" required  min="1" max="9999">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" th:field="*{dat}" required max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                                <input type="date" class="form-control" th:field="*{dat}" required  max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
                             </div>
                             <div class="col-12">
                                     <label class="form-label fw-semibold">Texto alternativo de la imagen <span class="text-danger">*</span></label>
-                                    <textarea class="form-control"  th:field="*{textImg}" rows="3" required minlength="10" maxlength="255"></textarea>
+                                    <textarea class="form-control"  th:field="*{textImg}" rows="3" required  minlength="10" maxlength="255"></textarea>
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
-                                <textarea class="form-control" th:field="*{syn}" rows="3" required minlength="10" maxlength="255"></textarea>
+                                <textarea class="form-control" th:field="*{syn}" rows="3" required  minlength="10" maxlength="255"></textarea>
                             </div>
 
                             <div class="col-md-6">
@@ -206,7 +214,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label fw-semibold">Unidades Vendidas</label>
-                                <input type="number" class="form-control" th:field="*{sales}">
+                                <input type="number" class="form-control" th:field="*{sales}" required>
                             </div>
                         </div>
                     </div>

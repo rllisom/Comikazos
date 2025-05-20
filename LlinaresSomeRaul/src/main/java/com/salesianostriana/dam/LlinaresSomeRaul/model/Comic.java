@@ -23,6 +23,7 @@ public class Comic {
 	private Long id;
 
 	private String name;
+	@Lob
 	private String syn;
 	private Double price;
 	private Integer sales;
@@ -30,14 +31,14 @@ public class Comic {
 	private Double review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
+	@Lob
 	private String url;
+	@Lob
 	private String textImg;
 	@ManyToOne
 	private Category category;
 
 	//HELPERS
-
-	//DISCOUNT
 	public double getDiscount(){
 		double rate = 0.95;
 

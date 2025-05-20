@@ -142,7 +142,7 @@
                     <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nuevo Cómic</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation" novalidate>
+                <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation">
                     <div class="modal-body">
                         <div class="row g-3">
                             <!-- Campos del formulario mejor organizados -->

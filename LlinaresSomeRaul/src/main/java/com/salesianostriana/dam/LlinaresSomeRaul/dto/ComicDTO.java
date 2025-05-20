@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ComicDTO {
 
 	private String name;
+	@Lob
 	private String syn;
 	private Double price;
 	private Integer sales;
@@ -22,7 +24,9 @@ public class ComicDTO {
 	private Double review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dat;
+	@Lob
 	private String url;
+	@Lob
 	private String textImg;
 	private Long category_id;
 

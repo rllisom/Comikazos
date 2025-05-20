@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @Controller
 public class CartController {
 
-    private final CartItemService cartItemService;
+
     private final ComicService comicService;
     private final CategoryService categoryService;
 
@@ -53,7 +53,9 @@ public class CartController {
         model.addAttribute("cartTotal", cartService.calculateTotal());
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("category2x1Id", cartService.getCategory2x1Id());
+        model.addAttribute("category2x1", cartService.discountPrice2x1());
         model.addAttribute("category10PerId", cartService.getCategory10PerId());
+        model.addAttribute("category10Per", cartService.discountPrice10Per());
         return "cart";
     }
 
@@ -71,14 +73,11 @@ public class CartController {
     //Apply discounts
     @PostMapping("/cart/discounts")
     public String applyDiscounts(@RequestParam("category2x1Id") Long category2x1Id, @RequestParam("category10PerId") Long category10PerId, HttpSession session, RedirectAttributes redirectAttributes){
-
         CartItemService cartService = (CartItemService) session.getAttribute("cartService");
-
         if(cartService == null){
             cartService = new CartItemService(new ArrayList<>(), 0L,0L,0L);
             session.setAttribute("cartService", cartService);
         }
-
         cartService.setCategory2x1Id(category2x1Id);
         cartService.setCategory10PerId(category10PerId);
         session.setAttribute("cartService",cartService);

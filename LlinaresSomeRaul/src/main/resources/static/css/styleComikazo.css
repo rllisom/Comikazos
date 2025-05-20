@@ -1,3 +1,7 @@
+.banner{
+    height: 250px;
+    overflow: hidden;
+}
 
 .carousel-img {
     height: 300px;
@@ -6,6 +10,10 @@
     overflow: hidden;
 }
 
+.newsPortada{
+    object-fit: cover;
+    height: 200px;
+}
 .portadaImagen{
             max-height: 70vh; 
             object-fit: contain;

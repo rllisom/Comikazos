@@ -17,8 +17,8 @@ public class CartItemService {
 
     private List<CartItem> cart;
     private Long count;
-    private Long category2x1Id = 0L;
-    private Long category10PerId = 0L;
+    private Long category2x1Id;
+    private Long category10PerId;
 
     //ADD TO CART
     public void addToCart(Comic c){
@@ -65,36 +65,49 @@ public class CartItemService {
     public double discountPrice2x1(){
         double resul = 0.0;
         int totalItems,freeItems;
-        List<CartItem> comics =
-                cart.stream()
-                .filter(c->c.getC().getCategory().getId().equals(category2x1Id))
-                        .sorted(Comparator.comparingDouble((CartItem c)->c.getC().getDiscount()))
-                        .toList();
+        List<CartItem> comics;
 
-        totalItems = comics.size();
-        freeItems = totalItems/2;
+        if(category2x1Id==0L){
+            return resul;
+        }else{
+            comics =
+                    cart.stream()
+                            .filter(c->c.getC().getCategory().getId().equals(category2x1Id))
+                            .sorted(Comparator.comparingDouble((CartItem c)->c.getC().getDiscount()))
+                            .toList();
 
-        resul = comics.stream()
-                .limit(freeItems)
-                .mapToDouble(c->c.getC().getDiscount())
-                .sum();
-        
-        return resul;
+            totalItems = comics.size();
+            freeItems = totalItems/2;
+
+            resul = comics.stream()
+                    .limit(freeItems)
+                    .mapToDouble(c->c.getC().getDiscount())
+                    .sum();
+
+            return resul;
+        }
+
     }
 
     /*Método que acumula los descuentos de los cómics de Marvel si en el carrito hay más de 3*/
     public double discountPrice10Per(){
         double discount = 0.1;
         double resul = 0.0;
-        List<CartItem> comics = cart.stream()
-                .filter(c->c.getC().getCategory().getId().equals(category10PerId))
-                .toList();
+        List<CartItem> comics;
 
-        if (comics.size() > 3){
-            for (CartItem item : comics){
-                resul += item.getC().getDiscount()*discount;
+        if (category10PerId==0L){
+            return resul;
+        }else{
+            comics= cart.stream()
+                    .filter(c->c.getC().getCategory().getId().equals(category10PerId))
+                    .toList();
+
+            if (comics.size() > 3){
+                for (CartItem item : comics){
+                    resul += item.getC().getDiscount()*discount;
+                }
             }
+            return  resul;
         }
-        return  resul;
     }
 }

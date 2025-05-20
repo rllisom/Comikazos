@@ -109,6 +109,13 @@
                                     </td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-center text-white py-3 bg-dark">
+                                        ¡Estos son los cómics mejor valorados por nuestra comunidad! 🌟
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -292,7 +299,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
@@ -308,7 +315,7 @@
                         <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nuevo Cómic</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation" novalidate>
+                    <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation">
                         <div class="modal-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
