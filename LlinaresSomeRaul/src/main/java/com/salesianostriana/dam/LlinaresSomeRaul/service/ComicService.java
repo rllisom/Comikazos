@@ -89,10 +89,10 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 		boolean exist = findAll().stream()
 				.anyMatch(c-> c.getName().equalsIgnoreCase(editComic.getName()) &&
 						c.getSyn().equalsIgnoreCase(editComic.getSyn()) &&
-						c.getPrice()==editComic.getPrice() &&
-						c.getSales()==editComic.getSales() &&
-						c.getPages()==editComic.getPages() &&
-						c.getReview()==editComic.getReview() &&
+						c.getPrice().equals(editComic.getPrice()) &&
+						c.getSales().equals(editComic.getSales()) &&
+						c.getPages().equals(editComic.getPages()) &&
+						c.getReview().equals(editComic.getReview()) &&
 						c.getDat().equals(editComic.getDat()) &&
 						c.getUrl().equalsIgnoreCase(editComic.getUrl()) &&
 						c.getCategory().equals(editComic.getCategory())
@@ -140,6 +140,10 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 			case "precioDesc" ->{ sortComics = repositorio.searchByPriceDesc(); }
 
 			case "ordenAlf" -> { sortComics = repositorio.searchByNameAsc();}
+
+			case "dateAsc" -> {sortComics = repositorio.searchByDateAsc();}
+
+			case  "dateDesc" -> {sortComics = repositorio.searchByDateDesc();}
 
 			default -> { sortComics = findAll(); }
 		}

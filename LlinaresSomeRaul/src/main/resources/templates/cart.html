@@ -20,118 +20,124 @@
     <main>
         
                 <div class="container my-5">
-                    <h2 class="fw-bold mb-4 text-center">🛒 Tu carrito</h2>
-                    <div th:if="${message}" class="alert alert-success alert-dismissible fade show text-center mx-3" role="alert">
-                        <span th:text="${message}"></span>
-                    </div>
-                    <div class="d-flex justify-content-center mb-4">
-                        <form th:action="@{/ck/cart/discounts}" method="POST" class="d-flex flex-column align-items-center gap-2 w-100 w-md-50">
-                            
-                            <div class="w-50">
-                                <label for="category2x1" class="form-label fw-bold">Editorial con 2x1:</label>
-                                <select id="category2x1" name="category2x1Id" class="form-select">
-                                    <option th:each="cat : ${categories}" th:if="${cat.id} != 0" th:value="${cat.id}" th:text="${cat.name}"
-                                            th:selected="${cat.id == category2x1Id}"></option>
-                                    <option value="0" th:selected="${category2x1Id == 0}">Sin promoción</option>
-                                </select>
-                            </div>
-
-                            <div class="w-50">
-                                <label for="category10Per" class="form-label fw-bold">Editorial con 10%:</label>
-                                <select id="category10Per" name="category10PerId" class="form-select">
-                                    <option th:each="cat : ${categories}" th:if="${cat.id} != 0" th:value="${cat.id}" th:text="${cat.name}"
-                                            th:selected="${cat.id == category10PerId}"></option>
-                                    <option value="0" th:selected="${category10PerId == 0}">Sin promoción</option>
-                                </select>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">
-                                Aplicar Descuentos
-                            </button>
-                        </form>
-                    </div>
-
-                    <div th:if="${#lists.isEmpty(cart)}" class="alert alert-warning text-center">
-                        Tu carrito está vacío.
-                    </div>
-
-                    <div th:if="${not #lists.isEmpty(cart)}">
-                        <div class="table-responsive">
-                            <table class="table align-middle table-bordered table-hover bg-white shadow-sm">
-                                <thead class="table-dark">
-                                    <tr class="text-center">
-                                        <th>Imagen</th>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="item : ${cart}" class="text-center">
-                                        <td style="width: 100px;">
-                                            <img th:src="${item.c.url}" th:alt="${item.c.textImg}" class="img-thumbnail" style="max-height: 100px; object-fit: cover;">
-                                        </td>
-                                        <td th:text="${item.c.name}" class="fw-semibold"></td>
-                                        <td>
-                                            <div th:if="${item.c.hasDiscount()}">
-                                                <span class="text-muted text-decoration-line-through me-2">
-                                                    <span th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
-                                                </span><br/>
-                                                <span class="text-success fw-bold">
-                                                    <span th:text="${#numbers.formatDecimal(item.c.getDiscount(), 1, 2)} + ' €'"></span>
-                                                </span><br/>
-                                                <span class="badge bg-danger mt-1">-5%</span>
-                                            </div>
-
-                                            <div th:unless="${item.c.hasDiscount()}">
-                                                <span class="text-success fw-bold" th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <form th:action="@{/ck/cart/delete/{id}(id=${item.id})}" method="POST">
-                                                <button type="submit" class="btn btn-danger">
-                                                    <i class="bi bi-x-lg"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr class="text-end mt-3 fw-bold">
-                                        <td colspan="3" class="fw-bold text-white bg-dark">Total:</td>
-                                        <td class="fw-bold text-white bg-dark">
-                                            <span  th:text="${#numbers.formatDecimal(cartTotal, 1, 2)} + ' €'">0.00 €</span>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                    <section>
+                        <h2 class="fw-bold mb-4 text-center">🛒 Tu carrito</h2>
+                        <div th:if="${message}" class="alert alert-success alert-dismissible fade show text-center mx-3" role="alert">
+                            <span th:text="${message}"></span>
                         </div>
-
-                        <section class="container my-4">
-                            <div class="card shadow-sm border-0">
-                                <div class="card-header bg-success text-white">
-                                    <h4 class="mb-0"><i class="bi bi-tags-fill me-2"></i>Descuentos aplicados</h4>
+                        <div class="d-flex justify-content-center mb-4">
+                            <form th:action="@{/ck/cart/discounts}" method="POST" class="d-flex flex-column align-items-center gap-2 w-100 w-md-50">
+                        
+                                <div class="w-50">
+                                    <label for="category2x1" class="form-label fw-bold">Editorial con 2x1:</label>
+                                    <select id="category2x1" name="category2x1Id" class="form-select">
+                                        <option th:each="cat : ${categories}" th:if="${cat.id} != 0" th:value="${cat.id}" th:text="${cat.name}"
+                                                th:selected="${cat.id == category2x1Id}"></option>
+                                        <option value="0" th:selected="${category2x1Id == 0}">Sin promoción</option>
+                                    </select>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span>🎁 Oferta 2x1</span>
-                                            <span class="text-danger fw-bold" th:text="'- ' + ${#numbers.formatDecimal(category2x1, 1, 2)} + ' €'">0.00 €</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span>📚 10% en cada cómic (si compras más de 3)</span>
-                                            <span class="text-danger fw-bold" th:text="'- ' + ${#numbers.formatDecimal(category10Per, 1, 2)} + ' €'">0.00 €</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center" th:if="${(cartTotal / 0.95) > 100}">
-                                            <span>💸 5% por superar los 100 €</span>
-                                            <span class="text-danger fw-bold" th:text="'- ' + ${#numbers.formatDecimal((cartTotal / 0.95) - cartTotal, 1, 2)} + ' €'">0.00 €</span>
-                                        </li>
-                                    </ul>
+                                <div class="w-50">
+                                    <label for="category10Per" class="form-label fw-bold">Editorial con 10%:</label>
+                                    <select id="category10Per" name="category10PerId" class="form-select">
+                                        <option th:each="cat : ${categories}" th:if="${cat.id} != 0" th:value="${cat.id}" th:text="${cat.name}"
+                                                th:selected="${cat.id == category10PerId}"></option>
+                                        <option value="0" th:selected="${category10PerId == 0}">Sin promoción</option>
+                                    </select>
                                 </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Aplicar Descuentos
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+                    <section>
+                        <div th:if="${#lists.isEmpty(cart)}" class="alert alert-warning text-center">
+                            Tu carrito está vacío.
+                        </div>
+                        <div th:if="${not #lists.isEmpty(cart)}">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-bordered table-hover bg-white shadow-sm">
+                                    <thead class="table-dark">
+                                        <tr class="text-center">
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
+                                            <th>Precio</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="item : ${cart}" class="text-center">
+                                            <td style="width: 100px;">
+                                                <img th:src="${item.c.url}" th:alt="${item.c.textImg}" class="img-thumbnail" style="max-height: 100px; object-fit: cover;">
+                                            </td>
+                                            <td th:text="${item.c.name}" class="fw-semibold"></td>
+                                            <td>
+                                                <div th:if="${item.c.hasDiscount()}">
+                                                    <span class="text-muted text-decoration-line-through me-2">
+                                                        <span th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
+                                                    </span><br/>
+                                                    <span class="text-success fw-bold">
+                                                        <span th:text="${#numbers.formatDecimal(item.c.getDiscount(), 1, 2)} + ' €'"></span>
+                                                    </span><br/>
+                                                    <span class="badge bg-danger mt-1">-5%</span>
+                                                </div>
+                                                <div th:unless="${item.c.hasDiscount()}">
+                                                    <span class="text-success fw-bold" th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <form th:action="@{/ck/cart/delete/{id}(id=${item.id})}" method="POST">
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="bi bi-x-lg"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="text-end mt-3 fw-bold">
+                                            <td colspan="3" class="fw-bold text-white bg-dark">Total:</td>
+                                            <td class="fw-bold text-white bg-dark">
+                                                <span  th:text="${#numbers.formatDecimal(cartTotal, 1, 2)} + ' €'">0.00 €</span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                        </section>
-
-                    </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="d-flex justify-content-center">
+                            <form th:action="@{/ck/comics}" method="GET" class="w-25">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-check2-circle me-2"></i>Seguir comprando
+                                </button>
+                            </form>
+                        </div>
+                    </section>
+                    <section class="container my-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-success text-white">
+                                <h4 class="mb-0"><i class="bi bi-tags-fill me-2"></i>Descuentos aplicados</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>🎁 Oferta 2x1</span>
+                                        <span class="text-danger fw-bold" th:text="'- ' + ${#numbers.formatDecimal(category2x1, 1, 2)} + ' €'">0.00 €</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <span>📚 10% en cada cómic (si compras más de 3)</span>
+                                        <span class="text-danger fw-bold" th:text="'- ' + ${#numbers.formatDecimal(category10Per, 1, 2)} + ' €'">0.00 €</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" th:if="${success}">
+                                        <span>💸 5% por superar los 100 €</span>
+                                        <span class="text-danger fw-bold" th:text="'- ' + ${#numbers.formatDecimal((cartTotal / 0.95) - cartTotal, 1, 2)} + ' €'">0.00 €</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
                 </div>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>

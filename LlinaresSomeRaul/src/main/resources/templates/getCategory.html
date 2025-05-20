@@ -72,76 +72,62 @@
             </div>
         </div>
 
-    <div th:if="${not #lists.isEmpty(category.listComic)}" class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
-        <div class="col" th:each="list : ${category.listComic}">
-            <div class="card h-100 border-0 shadow-sm">
-                <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none">
-                    <div class="position-relative">
-                        <div class="comic-img-container mx-auto">
-                            <img th:src="${list.url}"th:alt="${list.textImg}"
-                                class="card-img-top mt-2 object-fit-cover cardImg">
+        <div th:if="${not #lists.isEmpty(category.listComic)}" class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
+            <div class="col" th:each="list : ${category.listComic}">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a th:href="@{/ck/comic/{id}(id=${list.id})}" class="text-decoration-none">
+                        <div class="position-relative">
+                            <div class="comic-img-container mx-auto">
+                                <img th:src="${list.url}"th:alt="${list.textImg}"
+                                    class="card-img-top mt-2 object-fit-cover cardImg">
+                            </div>
+                            <span th:if="${list.sales > 100}" 
+                                class="badge bg-danger position-absolute top-0 start-0 m-2">
+                                <i class="bi bi-fire me-1"></i>Popular
+                            </span>
                         </div>
-                        <span th:if="${list.sales > 100}" 
-                            class="badge bg-danger position-absolute top-0 start-0 m-2">
-                            <i class="bi bi-fire me-1"></i>Popular
-                        </span>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold mb-1" th:text="${list.name}"></h5>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary" th:text="${list.category.name}"></span>
-                            <!-- Si tiene descuento -->
-                            <div th:if="${list.hasDiscount()}">
-                                <div class="d-flex flex-column align-items-end">
-                                    <div>
-                                        <span class="text-muted text-decoration-line-through me-2">
-                                            €<span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>
-                                        </span>
-                                        <span class="text-success fw-bold">
-                                            €<span th:text="${#numbers.formatDecimal(list.getDiscount(), 1, 2)}"></span>
-                                        </span>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold mb-1" th:text="${list.name}"></h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary" th:text="${list.category.name}"></span>
+                                <!-- Si tiene descuento -->
+                                <div th:if="${list.hasDiscount()}">
+                                    <div class="d-flex flex-column align-items-end">
+                                        <div>
+                                            <span class="text-muted text-decoration-line-through me-2">
+                                                €<span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>
+                                            </span>
+                                            <span class="text-success fw-bold">
+                                                €<span th:text="${#numbers.formatDecimal(list.getDiscount(), 1, 2)}"></span>
+                                            </span>
+                                        </div>
+                                        <span class="badge bg-danger mt-1">-5%</span>
                                     </div>
-                                    <span class="badge bg-danger mt-1">-5%</span>
+                                </div>
+                                <!--Si NO tiene descuento -->
+                                <div th:unless="${list.hasDiscount()}">
+                                    <span class="text-success fw-bold">
+                                        €<span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>
+                                    </span>
                                 </div>
                             </div>
-                            <!--Si NO tiene descuento -->
-                            <div th:unless="${list.hasDiscount()}">
-                                <span class="text-success fw-bold">
-                                    €<span th:text="${#numbers.formatDecimal(list.price, 1, 2)}"></span>
-                                </span>
+                            <div class="mt-2">
+                                <span th:text="${#temporals.format(list.dat, 'dd MMM yyyy')}"></span>
                             </div>
                         </div>
-                    </div>
-                </a>
-                <div class="card-footer mt-auto border-top-0 bg-transparent">
-                    <div class="d-grid gap-3">
-                            <button type="button" class="btn btn-lg btn-primary py-3" th:attr="data-bs-toggle='modal', data-bs-target='#aniadir__' + ${list.id}">
-                                <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
-                            </button>
+                    </a>
+                    <div class="card-footer mt-auto border-top-0 bg-transparent">
+                        <div class="d-grid gap-3 justify-content-center">
+                            <form th:action="@{/ck/cart/add/{id}(id=${list.id})}" method="GET">
+                                <button type="submit" class="btn btn-lg btn-primary py-3">
+                                    <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <!-- Modal de producto añadido -->
-                    <div class="modal fade" th:id="'aniadir__' + ${list.id}" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content text-center">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">¡Éxito!</h5>
-                                    <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
-                                </div>
-                                <div class="modal-body">
-                                    <p>Producto añadido a la cesta 🛒</p>
-                                </div>
-                                <div class="modal-footer d-flex justify-content-center">
-                                    <form th:action="@{/ck/cart/add/{id}(id=${list.id})}" method="GET">
-                                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Seguir comprando</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
             </div>
         </div>
-    </div>
 
         <div class="text-center mt-5">
             <button type="button" 

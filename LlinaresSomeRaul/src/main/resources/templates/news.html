@@ -82,25 +82,29 @@
                                                     
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
-                                                            <input type="text" class="form-control" th:value="${news.title}" name="title" id="title" required>
+                                                            <input type="text" class="form-control" th:value="${news.title}" name="title" id="title" required pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ ]+$" title="El título solo puede contener letras, números y espacios.">
                                                         </div>
 
                                                         <div class="col-md-6">
                                                             <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                                            <input type="date" class="form-control" th:value="${news.dateNew}" name="dateNew" id="dateNew" required>
+                                                            <input type="date" class="form-control" th:value="${news.dateNew}" name="dateNew" id="dateNew" required pattern="^\d{4}-\d{2}-\d{2}$" title="Formato de fecha: AAAA-MM-DD">
                                                         </div>
 
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">Descripción <span class="text-danger">*</span></label>
-                                                            <textarea th:text="${news.description}" class="form-control" th:value="${news.description}" name="description" id="description" required rows="3"></textarea>
+                                                            <textarea th:text="${news.description}" class="form-control" th:value="${news.description}" name="description" id="description" required rows="3" 
+                                                            pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ ,.'-]+$" title="La descripción solo puede contener letras, números, espacios y algunos caracteres especiales." maxlength="255"></textarea>
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
-                                                            <input type="url" class="form-control" th:value="${news.imgNew}" name="imgNew" id="imgNew"  required>
+                                                            <input type="url" class="form-control" th:value="${news.imgNew}" name="imgNew" id="imgNew"  required 
+                                                            pattern="^(https?:\/\/.*\)$" title="La URL de la imagen debe ser válida">
                                                         </div>
                                                         <div class="col-12">
                                                             <label class="form-label fw-semibold">Texto alternativo <span class="text-danger">*</span></label>
-                                                            <textarea class="form-control" th:text="${news.textImg}" th:value="${news.textImg}" name="textImg" id="textImg" required rows="3" ></textarea>
+                                                            <textarea class="form-control" th:text="${news.textImg}" th:value="${news.textImg}" name="textImg" id="textImg" required 
+                                                            rows="3" pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ ,.'-]+$" 
+                                                            title="El texto alternativo solo puede contener letras, números, espacios y algunos caracteres especiales." maxlength="255"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,32 +157,38 @@
                         <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nueva noticia</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                        <form method="POST" th:action="@{/ck/addNews}" th:object="${newsForm}" class="needs-validation" novalidate>
+                        <form method="POST" th:action="@{/ck/addNews}" th:object="${newsForm}" class="needs-validation">
                             <div class="modal-body">
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" th:field="*{title}" required>
+                                        <input type="text" class="form-control" th:field="*{title}" required pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ ]+$" 
+                                        title="El título solo puede contener letras, números y espacios.">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                        <input type="date" class="form-control" th:field="*{dateNew}" required>
+                                        <input type="date" class="form-control" th:field="*{dateNew}" required pattern="^\d{4}-\d{2}-\d{2}$"
+                                        title="Formato de fecha: AAAA-MM-DD">
                                     </div>
                                 </div>
                         
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Descripción <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" th:field="*{description}" required rows="3"></textarea>
+                                    <textarea class="form-control" th:field="*{description}" required rows="3" pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ ,.'-]+$"
+                                    title="La descripción solo puede contener letras, números, espacios y algunos caracteres especiales."></textarea>
                                 </div>
-                        
+
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
-                                    <input type="url" class="form-control" th:field="*{imgNew}" required>
+                                    <input type="url" class="form-control" th:field="*{imgNew}" required
+                                    pattern="^(https?:\/\/.*)$" title="La URL de la imagen debe ser válida.">
                                 </div>
-                        
+
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">Texto alternativo <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" th:field="*{textImg}" required rows="2"></textarea>
+                                    <textarea class="form-control" th:field="*{textImg}" required rows="2"
+                                    pattern="^[A-Za-z0-9áéíóúÁÉÍÓÚñÑüÜ ,.'-]+$" 
+                                    title="El texto alternativo solo puede contener letras, números, espacios y algunos caracteres especiales."></textarea>
                                 </div>
                             </div>
                     

@@ -46,19 +46,36 @@ public class CartItemService {
     //TOTAL
     public double calculateTotal(){
         double globalDiscount = 0.95;
-        double num = 100;
         double finalPrice;
         double total = cart.stream()
                 .mapToDouble(item -> item.getC().getDiscount())
                 .sum();
 
         finalPrice = total - discountPrice2x1() - discountPrice10Per();
-        if (finalPrice > num){
+        System.out.println(finalPrice);
+        if (isSuperior()){
             return finalPrice*globalDiscount;
         }else{
             return finalPrice;
         }
 
+    }
+
+    public boolean isSuperior(){
+        boolean success = false;
+        int num =100;
+        double total;
+        double finalPrice;
+
+        total = cart.stream()
+                .mapToDouble(item -> item.getC().getDiscount())
+                .sum();
+        finalPrice = total - discountPrice2x1() - discountPrice10Per();
+        if(finalPrice>num){
+            success = true;
+        }
+
+        return success;
     }
 
     //Método que cálcula el 2x1 en cómics de DC. De dos cómics de DC, cogemos el más barato que es el que nos saldrá gratis

@@ -45,7 +45,7 @@ public class ComicController {
 		model.addAttribute("category2x1",categoryService.findById(cartService.getCategory2x1Id()));
 		model.addAttribute("category10Per",categoryService.findById(cartService.getCategory10PerId()));
 
-		System.out.println("Categoría 2x1 activa: " + cartService.getCategory2x1Id());
+
 		return "principal";
 	}
 
@@ -67,7 +67,7 @@ public class ComicController {
 
 	//GET BY ID
 	@GetMapping("/comic/{id}")
-	public String getComic(@PathVariable Long id, Model model){
+	public String getComic(@PathVariable Long id, Model model,@RequestParam(required = false) String sort ){
 		model.addAttribute("comic", comicService.getByid(id));
 		model.addAttribute("comicDTO", ComicDTO.buildComicDTO(comicService.getByid(id)));
 		model.addAttribute("categories", categoryService.getAll());

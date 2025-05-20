@@ -18,193 +18,175 @@
     <header th:replace="~{fragments/header::header}"></header>
 
     
-    <section class="container-lg my-5">
-        <!-- Encabezado -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="fw-bold mb-0">Catálogo</h2>
-            <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newComicModal">
-                <i class="bi bi-plus-lg me-2"></i>Nuevo Cómic
-            </button>
-        </div>
-
-        <!--Editoriales -->
-        <div class="mb-4">
-            <div th:if="${#lists.isEmpty(categories)}" class="alert alert-warning text-center">
-                No se encontraron categorías
+    <main>
+        <section class="container-lg my-5">
+            <!-- Encabezado -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0">Catálogo</h2>
+                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#newComicModal">
+                    <i class="bi bi-plus-lg me-2"></i>Nuevo Cómic
+                </button>
             </div>
-
-            <div th:if="${not #lists.isEmpty(categories)}" class="bg-white border rounded p-3 shadow-sm">
-                <h5 class="fw-bold mb-3 text-center">Editoriales</h5>
-                <ul class="list-group list-group-horizontal overflow-auto justify-content-center flex-wrap gap-2">
-                    <li class="list-group-item border-0" th:each="category : ${categories}" th:if="${category.id} != 0">
-                        <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark d-block">
-                            <i class="bi bi-bookmark me-2"></i>
-                            <span th:text="${category.name}"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Filtro -->
-        <div class="w-25 w-sm-50 w-md-25 my-3 mx-auto">
-            <form th:action="@{/ck/sort}" method="GET">
-                <select class="form-select" name="sort" onchange="this.form.submit()">
-                    <option value="" th:selected="${sort == null}">Ordenar por...</option>
-                    <option th:value="precioAsc" th:selected="${sort == 'precioAsc'}">Precio (Mayor a menor)</option>
-                    <option th:value="precioDesc" th:selected="${sort == 'precioDesc'}">Precio (Menor a mayor)</option>
-                    <option th:value="ordenAlf" th:selected="${sort == 'ordenAlf'}">Orden alfabético</option>
-                </select>
-            </form>
-        </div>
-
-        <!-- Lista de cómics -->
-        <div th:if="${#lists.isEmpty(comicList)}" class="alert alert-warning text-center">
-            No se encontraron cómics
-        </div>
-
-        <div th:if="${not #lists.isEmpty(comicList)}" class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 d-flex justify-content-center">
-            <div class="col" th:each="comic : ${comicList}">
-                <div class="card h-100 border-0 shadow-sm">
-                    <a th:href="@{/ck/comic/{id}(id=${comic.id})}" class="text-decoration-none">
-                        <div class="position-relative">
-                            <div class="comic-img-container mx-auto">
-                                <img th:src="${comic.url}" class="card-img-top w-100 img-fluid object-fit-cover cardImg" th:alt="${comic.textImg}">
-                            </div>
-                            <span th:if="${comic.sales > 800}" class="badge bg-danger position-absolute top-0 start-0 m-2">
-                                <i class="bi bi-fire me-1"></i>Popular
-                            </span>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold mb-1" th:text="${comic.name}"></h6>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="badge bg-primary" th:text="${comic.category.name}"></span>
-
-                                <div th:if="${comic.hasDiscount()}">
-                                    <div class="d-flex flex-column align-items-end">
-                                        <div>
-                                            <span class="text-muted text-decoration-line-through me-2">
-                                                €<span th:text="${#numbers.formatDecimal(comic.price, 1, 2)}"></span>
-                                            </span>
-                                            <span class="text-success fw-bold">
-                                                €<span th:text="${#numbers.formatDecimal(comic.getDiscount(), 1, 2)}"></span>
-                                            </span>
-                                        </div>
-                                        <span class="badge bg-danger mt-1">-5%</span>
-                                    </div>
-                                </div>
-
-                                <div th:unless="${comic.hasDiscount()}">
-                                    <span class="text-success fw-bold">
-                                        €<span th:text="${#numbers.formatDecimal(comic.price, 1, 2)}"></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="card-footer mt-auto bg-transparent border-top-0">
-                        <div class="d-grid gap-3">
-                            <button type="button" class="btn btn-lg btn-primary py-3"
-                                    th:attr="data-bs-toggle='modal', data-bs-target='#aniadir__' + ${comic.id}">
-                                <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
-                            </button>
-                        </div>
-                    </div>
+            <!--Editoriales -->
+            <div class="mb-4">
+                <div th:if="${#lists.isEmpty(categories)}" class="alert alert-warning text-center">
+                    No se encontraron categorías
                 </div>
-
-                <!-- Modal -->
-                <div class="modal fade" th:id="'aniadir__' + ${comic.id}" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content text-center">
-                            <div class="modal-header">
-                                <h5 class="modal-title">¡Éxito!</h5>
+                <div th:if="${not #lists.isEmpty(categories)}" class="bg-white border rounded p-3 shadow-sm">
+                    <h5 class="fw-bold mb-3 text-center">Editoriales</h5>
+                    <ul class="list-group list-group-horizontal overflow-auto justify-content-center flex-wrap gap-2">
+                        <li class="list-group-item border-0" th:each="category : ${categories}" th:if="${category.id} != 0">
+                            <a th:href="@{/ck/show/{id}(id=${category.id})}" class="text-decoration-none text-dark d-block">
+                                <i class="bi bi-bookmark me-2"></i>
+                                <span th:text="${category.name}"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Filtro -->
+            <div class="w-25 w-sm-50 w-md-25 my-3 mx-auto">
+                <form th:action="@{/ck/sort}" method="GET">
+                    <select class="form-select" name="sort" onchange="this.form.submit()">
+                        <option value="" th:selected="${sort == null}">Ordenar por...</option>
+                        <option th:value="precioAsc" th:selected="${sort == 'precioAsc'}">Precio (Mayor a menor)</option>
+                        <option th:value="precioDesc" th:selected="${sort == 'precioDesc'}">Precio (Menor a mayor)</option>
+                        <option th:value="ordenAlf" th:selected="${sort == 'ordenAlf'}">Orden alfabético</option>
+                        <option th:value="dateAsc" th:selected="${sort == 'dateAsc'}">Fecha de publicación(menos reciente)</option>
+                        <option th:value="dateDesc" th:selected="${sort == 'dateDesc'}">Fecha de publicación(más reciente)</option>
+                    </select>
+                </form>
+            </div>
+            <!-- Lista de cómics -->
+            <div th:if="${#lists.isEmpty(comicList)}" class="alert alert-warning text-center">
+                No se encontraron cómics
+            </div>
+            <div th:if="${not #lists.isEmpty(comicList)}" class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4 d-flex justify-content-center">
+                <div class="col" th:each="comic : ${comicList}">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <a th:href="@{/ck/comic/{id}(id=${comic.id})}" class="text-decoration-none">
+                            <div class="position-relative">
+                                <div class="comic-img-container mx-auto">
+                                    <img th:src="${comic.url}" class="card-img-top w-100 img-fluid object-fit-cover cardImg" th:alt="${comic.textImg}">
+                                </div>
+                                <span th:if="${comic.sales > 800}" class="badge bg-danger position-absolute top-0 start-0 m-2">
+                                    <i class="bi bi-fire me-1"></i>Popular
+                                </span>
                             </div>
-                            <div class="modal-body">
-                                <p>Producto añadido a la cesta 🛒</p>
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold mb-1" th:text="${comic.name}"></h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-primary" th:text="${comic.category.name}"></span>
+                                    <div th:if="${comic.hasDiscount()}">
+                                        <div class="d-flex flex-column align-items-end">
+                                            <div>
+                                                <span class="text-muted text-decoration-line-through me-2">
+                                                    €<span th:text="${#numbers.formatDecimal(comic.price, 1, 2)}"></span>
+                                                </span>
+                                                <span class="text-success fw-bold">
+                                                    €<span th:text="${#numbers.formatDecimal(comic.getDiscount(), 1, 2)}"></span>
+                                                </span>
+                                            </div>
+                                            <span class="badge bg-danger mt-1">-5%</span>
+                                        </div>
+                                    </div>
+                                    <div th:unless="${comic.hasDiscount()}">
+                                        <span class="text-success fw-bold">
+                                            €<span th:text="${#numbers.formatDecimal(comic.price, 1, 2)}"></span>
+                                        </span>
+                                    </div>
+        
+                                </div>
+                                <div class="mt-2">
+                                    <span th:text="${#temporals.format(comic.dat, 'dd MMM yyyy')}"></span>
+                                </div>
                             </div>
-                            <div class="modal-footer d-flex justify-content-center">
+                        </a>
+                        <div class="card-footer mt-auto bg-transparent border-top-0">
+                            <div class="d-grid gap-3">
                                 <form th:action="@{/ck/cart/add/{id}(id=${comic.id})}" method="GET">
-                                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Seguir comprando</button>
+                                    <button type="submit" class="btn btn-lg btn-primary py-3">
+                                        <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
+                                    </button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Modal Comic -->
-    <div class="modal fade" id="newComicModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nuevo Cómic</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation">
-                    <div class="modal-body">
-                        <div class="row g-3">
-                            <!-- Campos del formulario mejor organizados -->
-                            <div class="col-12 col-md-6">
-                                <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" th:field="*{name}" required maxlength="100" pattern=".{3,}">
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label class="form-label fw-semibold">Editorial <span class="text-danger">*</span></label>
-                                <select class="form-select" th:field="*{category_id}" required>
-                                    <option value="" disabled selected>Seleccionar...</option>
-                                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
-                                </select>
-                            </div> 
-                            <div class="col-12 col-md-4">
-                                <label class="form-label fw-semibold">Precio (€) <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">€</span>
-                                    <input type="number" step="0.01" class="form-control" th:field="*{price}" required min="0" max="999.99">
+        </section>
+        <!-- Modal Comic -->
+        <div class="modal fade" id="newComicModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-white">
+                        <h5 class="modal-title"><i class="bi bi-book me-2"></i>Nuevo Cómic</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <form method="POST" th:action="@{/ck/addComic}" th:object="${comicForm}" class="needs-validation">
+                        <div class="modal-body">
+                            <div class="row g-3">
+                                <!-- Campos del formulario mejor organizados -->
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" th:field="*{name}" required maxlength="100" pattern=".{3,}">
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" th:field="*{pages}" required min="1" max="9999">
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" th:field="*{dat}" required max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
-                                <textarea class="form-control" th:field="*{syn}" rows="3" required minlength="10" maxlength="255"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Texto alternativo de la imagen <span class="text-danger">*</span></label>
-                                <textarea class="form-control" th:field="*{textImg}" rows="3" required minlength="10" maxlength="255"></textarea>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
-                                <input type="url" class="form-control" th:field="*{url}" required pattern="https?://.+" title="Por favor, introduce una URL válida.">
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <label class="form-label fw-semibold">Valoración <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <input type="number" step="0.1" class="form-control" th:field="*{review}" min="0" max="5" required>
-                                    <span class="input-group-text">/5</span>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label fw-semibold">Editorial <span class="text-danger">*</span></label>
+                                    <select class="form-select" th:field="*{category_id}" required>
+                                        <option value="" disabled selected>Seleccionar...</option>
+                                        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <label class="form-label fw-semibold">Unidades Vendidas</label>
-                                <input type="number" class="form-control" th:field="*{sales}">
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label fw-semibold">Precio (€) <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">€</span>
+                                        <input type="number" step="0.01" class="form-control" th:field="*{price}" required min="0" max="999.99">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" th:field="*{pages}" required min="1" max="9999">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" th:field="*{dat}" required max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" th:field="*{syn}" rows="3" required minlength="10" maxlength="255"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Texto alternativo de la imagen <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" th:field="*{textImg}" rows="3" required minlength="10" maxlength="255"></textarea>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
+                                    <input type="url" class="form-control" th:field="*{url}" required pattern="https?://.+" title="Por favor, introduce una URL válida.">
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <label class="form-label fw-semibold">Valoración <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="number" step="0.1" class="form-control" th:field="*{review}" min="0" max="5" required>
+                                        <span class="input-group-text">/5</span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-3">
+                                    <label class="form-label fw-semibold">Unidades Vendidas</label>
+                                    <input type="number" class="form-control" th:field="*{sales}">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Publicar Cómic</button>
-                    </div>
-                </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success">Publicar Cómic</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
     
     <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>

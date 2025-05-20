@@ -111,140 +111,133 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="border-start border-3 border-primary ps-3">
-                                <h5 class="text-uppercase text-black fw-bold mb-1">Fecha de lanzamiento</h5>
-                                <p class="h5 text-success" th:text="${comic.dat}"></p>
+                            <div>
+                                <div class="border-start border-3 border-primary ps-3 col-6">
+                                    <h5 class="text-uppercase text-black fw-bold mb-1">Fecha de lanzamiento</h5>
+                                    <p class="h5 text-success" th:text="${#temporals.format(comic.dat, 'dd MMM yyyy')}"></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="border-start border-3 border-success ps-3 col-6">
+                                    <h5 class="text-uppercase text-black fw-bold mb-1">Valoración</h5>
+                                    <p class="h5 text-success">
+                                        <span th:text="${comic.review}"></span> / 5 ⭐ 
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Botón abajo -->
-                        <div class="d-grid gap-3 mt-auto">
-                            <button class="btn btn-lg btn-primary py-3" data-bs-toggle="modal" data-bs-target="#addCart">
-                                <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
-                            </button>
+                        <div class=" mt-auto d-flex justify-content-center">
+                            <form th:action="@{/ck/cart/add/{id}(id=${comic.id})}" method="GET">
+                                <button class="btn btn-lg btn-primary py-3" type="submit">
+                                    <i class="bi bi-cart-plus me-2"></i>Añadir a la cesta
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <!-- Modal de eliminar cómic -->
-    <div class="modal fade" id="deleteComic" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+        <div class="modal fade" id="deleteComic" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
 
-                <form th:action="@{/ck/comic/delete/{id}(id=${comic.id})}" method="POST">
+                    <form th:action="@{/ck/comic/delete/{id}(id=${comic.id})}" method="POST">
+                        <div class="modal-header bg-dark text-white">
+                            <h5 class="modal-title">Eliminar cómic</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body text-center">
+                            <p>¿Estás seguro de que deseas eliminar este cómic?</p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-danger w-100">Sí</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-success w-100" data-bs-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal modificar Comic -->
+        <div class="modal fade" id="modComicModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
                     <div class="modal-header bg-dark text-white">
-                        <h5 class="modal-title">Eliminar cómic</h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title"><i class="bi bi-book me-2"></i>Editar Cómic</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
+                    <form method="POST" th:action="@{/ck/comic/edit/{id}(id=${comic.id})}" th:object="${comicDTO}" class="needs-validation">
+                        <div class="modal-body">
+                            <div class="row g-3">
+                                
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" th:field="*{name}" required maxlength="100" pattern=".{3,}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Editorial <span class="text-danger">*</span></label>
+                                    <select class="form-select" th:field="*{category_id}" required>
+                                        <option value="" selected>Seleccionar...</option>
+                                        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Precio (€) <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">€</span>
+                                        <input type="number" step="0.01" class="form-control" th:field="*{price}" required min="0" max="999.99">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" th:field="*{pages}" required  min="1" max="9999">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" th:field="*{dat}" required  max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
+                                </div>
+                                <div class="col-12">
+                                        <label class="form-label fw-semibold">Texto alternativo de la imagen <span class="text-danger">*</span></label>
+                                        <textarea class="form-control"  th:field="*{textImg}" rows="3" required  minlength="10" maxlength="255"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" th:field="*{syn}" rows="3" required  minlength="10" maxlength="255"></textarea>
+                                </div>
 
-                    <div class="modal-body text-center">
-                        <p>¿Estás seguro de que deseas eliminar este cómic?</p>
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-danger w-100">Sí</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="button" class="btn btn-success w-100" data-bs-dismiss="modal">No</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-    <!-- Modal modificar Comic -->
-    <div class="modal fade" id="modComicModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title"><i class="bi bi-book me-2"></i>Editar Cómic</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <form method="POST" th:action="@{/ck/comic/edit/{id}(id=${comic.id})}" th:object="${comicDTO}" class="needs-validation">
-                    <div class="modal-body">
-                        <div class="row g-3">
-                            
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Título <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" th:field="*{name}" required maxlength="100" pattern=".{3,}">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Editorial <span class="text-danger">*</span></label>
-                                <select class="form-select" th:field="*{category_id}" required>
-                                    <option value="" selected>Seleccionar...</option>
-                                    <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label fw-semibold">Precio (€) <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">€</span>
-                                    <input type="number" step="0.01" class="form-control" th:field="*{price}" required min="0" max="999.99">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
+                                    <input type="url" class="form-control" th:field="*{url}" required pattern="https?://.+" title="Por favor, introduce una URL válida.">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Valoración <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="number" step="0.1" class="form-control" th:field="*{review}" min="0" max="5" required>
+                                        <span class="input-group-text">/5</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label fw-semibold">Unidades Vendidas</label>
+                                    <input type="number" class="form-control" th:field="*{sales}" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <label class="form-label fw-semibold">Páginas <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" th:field="*{pages}" required  min="1" max="9999">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label fw-semibold">Fecha Publicación <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" th:field="*{dat}" required  max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}">
-                            </div>
-                            <div class="col-12">
-                                    <label class="form-label fw-semibold">Texto alternativo de la imagen <span class="text-danger">*</span></label>
-                                    <textarea class="form-control"  th:field="*{textImg}" rows="3" required  minlength="10" maxlength="255"></textarea>
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label fw-semibold">Sinopsis <span class="text-danger">*</span></label>
-                                <textarea class="form-control" th:field="*{syn}" rows="3" required  minlength="10" maxlength="255"></textarea>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">URL Imagen <span class="text-danger">*</span></label>
-                                <input type="url" class="form-control" th:field="*{url}" required pattern="https?://.+" title="Por favor, introduce una URL válida.">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label fw-semibold">Valoración <span class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <input type="number" step="0.1" class="form-control" th:field="*{review}" min="0" max="5" required>
-                                    <span class="input-group-text">/5</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label fw-semibold">Unidades Vendidas</label>
-                                <input type="number" class="form-control" th:field="*{sales}" required>
-                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Editar Cómic</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal de producto añadido -->
-    <div class="modal fade" id="addCart" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h5 class="modal-title">¡Éxito!</h5>
-                    <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>-->
-                </div>
-                <div class="modal-body">
-                    <p>Producto añadido a la cesta 🛒</p>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <form th:action="@{/ck/cart/add/{id}(id=${comic.id})}" method="GET">
-                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Seguir comprando</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-success">Editar Cómic</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
     </main>
     <footer th:replace="~{fragments/footer::footer}"></footer>
 </body>

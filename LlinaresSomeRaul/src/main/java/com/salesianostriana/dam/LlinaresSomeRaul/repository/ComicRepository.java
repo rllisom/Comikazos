@@ -35,4 +35,17 @@ public interface ComicRepository extends JpaRepository<Comic, Long>{
             """)
     List<Comic> searchByNameAsc();
 
+	@Query("""
+            select c
+			from Comic c
+			order by c.dat ASC
+            """)
+	List<Comic> searchByDateAsc();
+
+	@Query("""
+            select c
+			from Comic c
+			order by c.dat DESC
+            """)
+	List<Comic> searchByDateDesc();
 }
