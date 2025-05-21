@@ -33,8 +33,11 @@
                         <li class="nav-item"><a class="nav-link titulo" th:href="@{/ck/aboutUs}">Conócenos</a></li>
                         <li class="nav-item"><a class="nav-link titulo" th:href="@{/ck/news}">Noticias</a></li>
                         <li class="nav-item"><a class="nav-link titulo" th:href="@{/ck/comics}">Cómics</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" th:href="@{/ck/cart}"><i class="bi bi-cart3"></i></a>
+                        <li class="nav-item position-relative me-3">
+                            <a class="nav-link position-relative p-2" th:href="@{/ck/cart}">
+                                <i class="bi bi-cart3"></i>
+                                <span class="position-absolute top-5 mt-auto start-100 translate-middle badge rounded-pill bg-danger" th:text="${cart.size()}">0</span>
+                            </a>
                         </li>
                     </ul>
                 </div>

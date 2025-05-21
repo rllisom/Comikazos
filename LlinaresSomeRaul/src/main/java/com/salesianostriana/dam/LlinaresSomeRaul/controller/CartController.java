@@ -1,26 +1,32 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.CartItemService;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.CategoryService;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.ComicService;
-import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/ck")
-@RequiredArgsConstructor
 @Controller
 public class CartController {
 
-
-    private final ComicService comicService;
-    private final CategoryService categoryService;
+	@Autowired
+    private  ComicService comicService;
+	@Autowired
+    private  CategoryService categoryService;
 
     //ADD COMIC TO CART
     @GetMapping("/cart/add/{id}")

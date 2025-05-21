@@ -10,10 +10,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
-@Entity 
+@Entity
 @AllArgsConstructor
-@NoArgsConstructor 
+@NoArgsConstructor
 @Data
 @Builder
 public class Comic {
@@ -30,7 +29,7 @@ public class Comic {
 	private Integer pages;
 	private Double review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dat;
+	private LocalDate releaseDate;
 	@Lob
 	private String url;
 	@Lob
@@ -38,18 +37,29 @@ public class Comic {
 	@ManyToOne
 	private Category category;
 
-	//HELPERS
-	public double getDiscount(){
+	// HELPERS
+
+	public void addToComic(Category c) {
+		this.category = c;
+		c.getListComic().add(this);
+	}
+
+	public void removeFromComic(Category cNueva) {
+		this.category.getListComic().remove(this);
+		this.addToComic(cNueva);
+	}
+
+	public double getDiscount() {
 		double rate = 0.95;
 
-		if(hasDiscount()){
-			return price*rate;
-		}else{
+		if (hasDiscount()) {
+			return price * rate;
+		} else {
 			return price;
 		}
 	}
 
 	public boolean hasDiscount() {
-		return dat != null && ChronoUnit.DAYS.between(dat, LocalDate.now()) > 50;
+		return releaseDate != null && ChronoUnit.DAYS.between(releaseDate, LocalDate.now()) > 50;
 	}
 }

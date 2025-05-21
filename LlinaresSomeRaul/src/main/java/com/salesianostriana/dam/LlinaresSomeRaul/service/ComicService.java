@@ -1,9 +1,7 @@
 package com.salesianostriana.dam.LlinaresSomeRaul.service;
 
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -93,7 +91,7 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 						c.getSales().equals(editComic.getSales()) &&
 						c.getPages().equals(editComic.getPages()) &&
 						c.getReview().equals(editComic.getReview()) &&
-						c.getDat().equals(editComic.getDat()) &&
+						c.getReleaseDate().equals(editComic.getReleaseDate()) &&
 						c.getUrl().equalsIgnoreCase(editComic.getUrl()) &&
 						c.getCategory().equals(editComic.getCategory())
 				);
@@ -103,7 +101,7 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 				editComic.getSales() == null ||
 				editComic.getPages() == null ||
 				editComic.getReview() == null ||
-				editComic.getDat() == null ||
+				editComic.getReleaseDate() == null ||
 				editComic.getUrl() == null || editComic.getUrl().isBlank() ||
 				editComic.getCategory() == null;
 

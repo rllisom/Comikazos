@@ -23,7 +23,7 @@ public class ComicDTO {
 	private Integer pages;
 	private Double review;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dat;
+	private LocalDate releaseDate;
 	@Lob
 	private String url;
 	@Lob
@@ -40,7 +40,7 @@ public class ComicDTO {
 				.sales(dto.getSales())
 				.pages(dto.getPages())
 				.review(dto.getReview())
-				.dat(dto.getDat())
+				.releaseDate(dto.getReleaseDate())
 				.url(dto.getUrl())
 				.textImg(dto.getTextImg())
 				.category(cat)
@@ -55,7 +55,7 @@ public class ComicDTO {
 				.sales(c.getSales())
 				.pages(c.getPages())
 				.review(c.getReview())
-				.dat(c.getDat())
+				.releaseDate(c.getReleaseDate())
 				.url(c.getUrl())
 				.textImg(c.getTextImg())
 				.category_id(c.getCategory().getId())
