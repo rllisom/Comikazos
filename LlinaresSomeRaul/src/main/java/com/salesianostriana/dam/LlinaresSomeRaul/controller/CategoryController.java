@@ -30,13 +30,13 @@ public class CategoryController {
     //GET BY ID
     @GetMapping("/show/{id}")
     public String getCategory(@PathVariable Long id, Model model, HttpSession session){
-    	
-    	CartItemService cartService = (CartItemService) session.getAttribute("cartService");
+    
+    CartItemService cartService = (CartItemService) session.getAttribute("cartService");
 		if (cartService == null) {
 			cartService = new CartItemService(new ArrayList<>(), 0L, 0L, 0L);
 			session.setAttribute("cartService", cartService);
 		}
-    	
+    
         model.addAttribute("category", categoryService.getById(id));
         model.addAttribute("categories", categoryService.getAll());
         model.addAttribute("comicForm", new ComicDTO());

@@ -47,8 +47,8 @@ public class ComicController {
 		model.addAttribute("comics", comicService.getBest());
 		model.addAttribute("comicList",comicService.getCatalogue());
 		model.addAttribute("newsList",newsService.getSomeNews());
-		model.addAttribute("category2x1",categoryService.findById(cartService.getCategory2x1Id()));
-		model.addAttribute("category10Per",categoryService.findById(cartService.getCategory10PerId()));
+		model.addAttribute("category2x1",categoryService.findById(cartService.getCategory2x1Id()).get());
+		model.addAttribute("category10Per",categoryService.findById(cartService.getCategory10PerId()).get());
 		model.addAttribute("cart", cartService.getCart());
 
 
@@ -117,7 +117,7 @@ public class ComicController {
 	public String deleteComic(@PathVariable Long id, RedirectAttributes redirectAttributes){
 		if(comicService.deleteComic(id)){
 			redirectAttributes.addFlashAttribute("doneComic",true);
-			return "redirect:/ck";
+			return "redirect:/ck/comics";
 		}else{
 			redirectAttributes.addFlashAttribute("doneComic",false);
 			return "redirect:/ck/comic/"+id;
@@ -138,7 +138,7 @@ public class ComicController {
 
 	//SEARCH
 	@GetMapping("/comic/search")
-	public String searchComics(@RequestParam("query") String query, Model model,  HttpSession session) {
+	public String searchComics(@RequestParam String query, Model model,  HttpSession session) {
 		
 		CartItemService cartService = (CartItemService) session.getAttribute("cartService");
 		if (cartService == null) {

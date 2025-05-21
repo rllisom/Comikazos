@@ -31,7 +31,7 @@ public class CartController {
     //ADD COMIC TO CART
     @GetMapping("/cart/add/{id}")
     public String addToCart(@PathVariable Long id, HttpSession session){
-        Comic c = comicService.findById(id);
+        Comic c = comicService.findById(id).get();
         CartItemService cartService = (CartItemService) session.getAttribute("cartService");
 
         if(cartService == null){
@@ -79,7 +79,7 @@ public class CartController {
 
     //Apply discounts
     @PostMapping("/cart/discounts")
-    public String applyDiscounts(@RequestParam("category2x1Id") Long category2x1Id, @RequestParam("category10PerId") Long category10PerId,
+    public String applyDiscounts(@RequestParam Long category2x1Id, @RequestParam Long category10PerId,
                                  HttpSession session, RedirectAttributes redirectAttributes){
         CartItemService cartService = (CartItemService) session.getAttribute("cartService");
         if(cartService == null){

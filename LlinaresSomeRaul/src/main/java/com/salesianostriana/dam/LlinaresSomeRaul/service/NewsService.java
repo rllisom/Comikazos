@@ -3,13 +3,12 @@ package com.salesianostriana.dam.LlinaresSomeRaul.service;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.News;
 import com.salesianostriana.dam.LlinaresSomeRaul.repository.NewsRepository;
 import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @Service
 public class NewsService extends BaseServiceImpl<News,Long, NewsRepository> {
 
@@ -30,7 +29,7 @@ public class NewsService extends BaseServiceImpl<News,Long, NewsRepository> {
     //DELETE
     public boolean deleteNew(Long id){
         if (findById(id) != null) {
-            delete(findById(id));
+            delete(findById(id).get());
             return true;
         }else {
             return false;
@@ -39,7 +38,7 @@ public class NewsService extends BaseServiceImpl<News,Long, NewsRepository> {
 
     //EDIT
     public boolean editNews(Long id, News news){
-        News original = findById(id);
+        News original = findById(id).get();
         news.setId(id);
         boolean exist = findAll().stream()
                 .anyMatch(n->n.getDateNew().equals(news.getDateNew()) &&
@@ -58,7 +57,7 @@ public class NewsService extends BaseServiceImpl<News,Long, NewsRepository> {
     }
 
     //ADD
-    public News addNews (News news){
+    public boolean addNews (News news){
         boolean exist = findAll().stream()
                 .anyMatch(n->n.getDateNew().equals(news.getDateNew()) &&
                         n.getImgNew().equalsIgnoreCase(news.getImgNew()) &&
@@ -66,9 +65,10 @@ public class NewsService extends BaseServiceImpl<News,Long, NewsRepository> {
                         n.getTitle().equalsIgnoreCase(news.getDescription()));
 
         if (exist) {
-            return null;
+            return false;
         } else {
-            return save(news);
+            save(news);
+            return true;
         }
     }
 }

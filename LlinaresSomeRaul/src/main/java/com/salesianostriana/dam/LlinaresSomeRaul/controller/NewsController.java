@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @RequestMapping("/ck")
@@ -47,22 +48,34 @@ public class NewsController {
 
     //DELETE
     @PostMapping("/new/delete/{id}")
-    public String deleteNew(@PathVariable Long id){
-        newsService.deleteNew(id);
+    public String deleteNew(@PathVariable Long id, RedirectAttributes redirectAttributes){
+        if(newsService.deleteNew(id)){
+            redirectAttributes.addFlashAttribute("done", true);
+        }else{
+            redirectAttributes.addFlashAttribute("done", false);
+        }
         return "redirect:/ck/news";
     }
 
     //EDIT
     @PostMapping("/news/edit/{id}")
-    public String editNews (@PathVariable Long id, News news){
-        newsService.editNews(id,news);
+    public String editNews (@PathVariable Long id, News news, RedirectAttributes redirectAttributes){
+        if(newsService.editNews(id,news)){
+            redirectAttributes.addFlashAttribute("success", true);
+        }else{
+            redirectAttributes.addFlashAttribute("success", false);
+        }
         return "redirect:/ck/news";
     }
 
     //ADD
     @PostMapping("/addNews")
-    public String addNews(@ModelAttribute("newsForm") News n){
-        newsService.addNews(n);
+    public String addNews(@ModelAttribute("newsForm") News n, RedirectAttributes redirectAttributes){
+        if(newsService.addNews(n)){
+            redirectAttributes.addFlashAttribute("newsAdd", true);
+        }else{
+            redirectAttributes.addFlashAttribute("newsAdd", false);
+        }
         return "redirect:/ck/news";
     }
 }

@@ -52,7 +52,7 @@ public class CartItemService {
                 .sum();
 
         finalPrice = total - discountPrice2x1() - discountPrice10Per();
-        System.out.println(finalPrice);
+        
         if (isSuperior()){
             return finalPrice*globalDiscount;
         }else{

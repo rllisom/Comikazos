@@ -7,24 +7,24 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
-import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseServiceImpl;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.LlinaresSomeRaul.dto.ComicDTO;
+import com.salesianostriana.dam.LlinaresSomeRaul.model.Category;
 import com.salesianostriana.dam.LlinaresSomeRaul.model.Comic;
 import com.salesianostriana.dam.LlinaresSomeRaul.repository.ComicRepository;
+import com.salesianostriana.dam.LlinaresSomeRaul.service.base.BaseServiceImpl;
 
 
-@RequiredArgsConstructor
+
 @Service
 public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 
-
-	private final CategoryService categoryService;
-	private final ComicRepository comicRepository;
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private ComicRepository comicRepository;
 	
 	//GET ALL
 	public List<Comic> getAll(){
@@ -50,21 +50,22 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 	//GET BY ID
 	public Comic getByid(Long id) {
 
-		return findById(id);
+		return findById(id).get();
 			
 	}
 
 	//POST NEW COMIC
 	public Comic add(ComicDTO dto){
-		Category cat = categoryService.findById(dto.getCategory_id());
-
+		Category cat = categoryService.findById(dto.getCategory_id()).get();
+		Comic newComic = ComicDTO.buildComic(dto,cat);
 		boolean exist = findAll().stream()
-				.anyMatch(c -> c.getName().equalsIgnoreCase(dto.getName()));
+				.anyMatch(c -> c.getName().trim().equalsIgnoreCase(newComic.getName().trim()) ||					
+						c.getUrl().trim().equalsIgnoreCase(newComic.getUrl().trim()));
 
 		if (exist) {
 			return null;
 		} else {
-			return save(ComicDTO.buildComic(dto,cat));
+			return save(newComic);
 		}
 
 	}
@@ -72,7 +73,7 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 	//DELETE COMIC
 	public boolean deleteComic(Long id) {
 		if (findById(id) != null) {
-			delete(findById(id));
+			delete(findById(id).get());
 			return true;
 		}else {
 			return false;
@@ -81,8 +82,8 @@ public class ComicService extends BaseServiceImpl<Comic,Long,ComicRepository> {
 
 	//EDIT COMIC
 	public boolean editComic(Long id, ComicDTO dto){
-		Comic original = findById(id);
-		Comic editComic = ComicDTO.buildComic(dto,categoryService.findById(dto.getCategory_id()));
+		Comic original = findById(id).get();
+		Comic editComic = ComicDTO.buildComic(dto,categoryService.findById(dto.getCategory_id()).get());
 		editComic.setId(id);
 		boolean exist = findAll().stream()
 				.anyMatch(c-> c.getName().equalsIgnoreCase(editComic.getName()) &&
