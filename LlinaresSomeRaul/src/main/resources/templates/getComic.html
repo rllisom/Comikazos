@@ -93,14 +93,14 @@
                                     <div th:if="${comic.hasDiscount()}">
                                         <div class="d-flex flex-column align-items-start">
                                             <div>
-                                                <span class="text-muted text-decoration-line-through me-2 h3">
+                                                <span th:if="${comic.price != 0}" class="text-muted text-decoration-line-through me-2 h3">
                                                     €<span th:text="${#numbers.formatDecimal(comic.price, 1, 2)}"></span>
                                                 </span>
                                                 <span class="text-success fw-bold h3">
                                                     €<span th:text="${#numbers.formatDecimal(comic.getDiscount(), 1, 2)}"></span>
                                                 </span>
                                             </div>
-                                            <span class="badge bg-danger mt-1">-5%</span>
+                                            <span  th:if="${comic.price != 0}" class="badge bg-danger mt-1">-5%</span>
                                         </div>
                                     </div>
                                     <!-- Si NO tiene descuento -->

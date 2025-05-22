@@ -52,7 +52,7 @@ public class Comic {
 	public double getDiscount() {
 		double rate = 0.95;
 
-		if (hasDiscount()) {
+		if (hasDiscount() && price!=0) {
 			return price * rate;
 		} else {
 			return price;

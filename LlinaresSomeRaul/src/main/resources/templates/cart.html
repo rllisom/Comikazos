@@ -73,13 +73,13 @@
                                             <td th:text="${item.c.name}" class="fw-semibold"></td>
                                             <td>
                                                 <div th:if="${item.c.hasDiscount()}">
-                                                    <span class="text-muted text-decoration-line-through me-2">
+                                                    <span th:if="${item.c.price != 0}" class="text-muted text-decoration-line-through me-2">
                                                         <span th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
                                                     </span><br/>
                                                     <span class="text-success fw-bold">
                                                         <span th:text="${#numbers.formatDecimal(item.c.getDiscount(), 1, 2)} + ' €'"></span>
                                                     </span><br/>
-                                                    <span class="badge bg-danger mt-1">-5%</span>
+                                                    <span th:if="${item.c.price != 0}" class="badge bg-danger mt-1">-5%</span>
                                                 </div>
                                                 <div th:unless="${item.c.hasDiscount()}">
                                                     <span class="text-success fw-bold" th:text="${#numbers.formatDecimal(item.c.price, 1, 2)} + ' €'"></span>
