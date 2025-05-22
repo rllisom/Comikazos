@@ -23,7 +23,7 @@ import com.salesianostriana.dam.LlinaresSomeRaul.service.NewsService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/ck")
+@RequestMapping({"/","/ck"})
 public class ComicController {
 
 	@Autowired
